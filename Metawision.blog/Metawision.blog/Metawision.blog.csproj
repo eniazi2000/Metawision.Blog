@@ -197,6 +197,7 @@
     <Compile Include="Models\Bl\articleManager.cs" />
     <Compile Include="Models\Bl\usersManager.cs" />
     <Compile Include="Models\DTO\articleDTO.cs" />
+    <Compile Include="Models\DTO\tagDTO.cs" />
     <Compile Include="Models\Temp.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

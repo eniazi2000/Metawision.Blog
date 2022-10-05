@@ -40,10 +40,56 @@ namespace Metawision.blog.Models
                 return false;
             }
         }
-
-
-
-
+        public static List<tag> getAllTags()
+        {
+            DataClasses1DataContext db = new DataClasses1DataContext();
+            return db.tags.ToList();
+        }
+        public static List<tag> getArticleTags(int articleId)
+        {
+            return getAllTags().Where(a => a.idArticle == articleId).ToList();
+        }
+        public static bool saveTagToDatabase(tagDTO model)
+        {
+            DataClasses1DataContext db = new DataClasses1DataContext();
+            try
+            {
+                tag item = new tag
+                {
+                    idArticle = model.idArticle,
+                    title = model.title
+                };
+                db.tags.InsertOnSubmit(item);
+                db.SubmitChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+        public static bool deelteTagFromDatabase(int idTag)
+        {
+            DataClasses1DataContext db = new DataClasses1DataContext();
+            var item = db.tags.Where(t => t.id == idTag).FirstOrDefault();
+            try
+            {
+                if(item!= null)
+                {
+                    db.tags.DeleteOnSubmit(item);
+                    db.SubmitChanges();
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch
+            {
+                return false;
+            }
+        }
 
 
     }
