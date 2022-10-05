@@ -29,7 +29,10 @@ namespace Metawision.blog.Models
             return account.Address;
         }
 
-
+        public static string GetSessionID()
+        {
+            return HttpContext.Current.Session.SessionID;
+        }
 
     }
 }
