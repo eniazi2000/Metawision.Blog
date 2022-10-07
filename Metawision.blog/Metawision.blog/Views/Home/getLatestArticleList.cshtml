@@ -5,7 +5,7 @@
 
 @{
     int page = Model;
-    int pSize = 10;
+    int pSize = 2;
     int pStart = (page - 1) * pSize + 1;
     int pEnd = (page) * pSize;
 
@@ -44,25 +44,63 @@
             </div>
             <hr />
         </div>
-    }
-    <nav aria-label="Page navigation example">
-        <ul class="pagination">
-            <li class="page-item">
-                <a class="page-link" href="#" aria-label="Previous">
-                    <span aria-hidden="true">&laquo;</span>
-                    <span class="sr-only">Previous</span>
-                </a>
-            </li>
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item">
-                <a class="page-link" href="#" aria-label="Next">
-                    <span aria-hidden="true">&raquo;</span>
-                    <span class="sr-only">Next</span>
-                </a>
-            </li>
-        </ul>
-    </nav>
+                }
+ 
+    if (page == 1)
+    {
+        <nav aria-label="Page navigation" class="text-center">
+            <ul class="pagination">
+                @{
+                    for (int j = page; j < page + 3; j++)
+                    {
+                        <li><a href="~/home/index/?id=@j">@j</a></li>
+                    }
+                    <li><a href="~/home/index/?id=1">...</a></li>
+                }
 
+                <li><a href="~/home/index/?id=1">1</a></li>
+                <li><a href="~/home/index/?id=2">2</a></li>
+                <li><a href="~/home/index/?id=3">3</a></li>
+                <li><a href="~/home/index/?id=4">4</a></li>
+                <li><a href="~/home/index/?id=5">5</a></li>
+                <li>
+                    <a href="#" aria-label="Next">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    }
+    if (page > 1 && page < pages)
+    {
+        <nav aria-label="Page navigation" class="text-center">
+            <ul class="pagination">
+                <li>
+                    <a href="#" aria-label="Previous">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+                <li><a href="#">1</a></li>
+                <li><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                <li><a href="#">4</a></li>
+                <li><a href="#">5</a></li>
+                <li>
+                    <a href="#" aria-label="Next">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    }
+    if (page == pages)
+    {
+
+    }
 }
+
+<script>
+
+    $()
+
+</script>
