@@ -1,37 +1,68 @@
 ﻿@using Metawision.blog.Models;
 
+@model int
+
+
 @{
+    int page = Model;
+    int pSize = 10;
+    int pStart = (page - 1) * pSize + 1;
+    int pEnd = (page) * pSize;
+
     var artList = articleManager.getAllArticle();
-    int i = 0;
-
     int len = artList.ToArray().Length;
-    int lenn = len % 10;
-    @lenn
+    var slice = artList.Skip((page - 1) * pSize).Take(pSize);
+    int pages = 0;
 
-    foreach (var art in artList)
+    if (0 < len % 10 && len % 10 < 10)
     {
-
-        if (i <= 9)
-        {
-            <div class="container-fluid">
-                <div>
-                    <img src="@art.pic" width="100%" />
-                </div>
-                <br />
-                <div>
-                    <h4 style="direction:rtl">@art.date</h4>
-                </div>
-                <div>
-                    <h2>
-                        <a href="~/Home/index/@art.Id">@art.title</a>
-                    </h2>
-                </div>
-                <div>
-                    <p>@art.body</p>
-                </div>
-                <hr />
-            </div>
-        }
-        i = i + 1;
+        pages = (len / pSize) + 1;
     }
+    else
+    {
+        pages = (len / pSize);
+    }
+    @pages
+
+    foreach (var art in slice)
+    {
+        <div class="container-fluid">
+            <div>
+                <img src="@art.pic" width="100%" />
+            </div>
+            <br />
+            <div>
+                <h4 style="direction:rtl">@art.date</h4>
+            </div>
+            <div>
+                <h2>
+                    <a href="~/Home/index/@art.Id">@art.title</a>
+                </h2>
+            </div>
+            <div>
+                <p>@art.body</p>
+            </div>
+            <hr />
+        </div>
+    }
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            <li class="page-item">
+                <a class="page-link" href="#" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                    <span class="sr-only">Previous</span>
+                </a>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item">
+                <a class="page-link" href="#" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
 }
