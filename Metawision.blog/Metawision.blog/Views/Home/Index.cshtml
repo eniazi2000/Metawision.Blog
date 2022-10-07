@@ -15,9 +15,8 @@
         @DateTime.Now
         <hr />
         t = @i*@
-    @Model
+    int id = Model;
 }
-Model
 
 <br />
 <div class="container-fluid">
@@ -33,7 +32,7 @@ Model
         </div>
         <div class="col-lg-9" style="background-color: #e3e6e8; height: auto;">
             @{
-                Html.RenderPartial("getLatestArticleList");
+                Html.RenderPartial("getLatestArticleList", id);
              }
         </div>
     </div>
