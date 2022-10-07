@@ -7,12 +7,17 @@ namespace Metawision.blog.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index()
+        [HttpGet]
+        public ActionResult Index(int id)
         {
-        
-            return View();
-        }
 
+            return View(id);
+        }
+        [HttpGet]
+        public ActionResult Page(int id)
+        {
+            return View(id);
+        }
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
@@ -26,5 +31,6 @@ namespace Metawision.blog.Controllers
 
             return View();
         }
+        
     }
 }

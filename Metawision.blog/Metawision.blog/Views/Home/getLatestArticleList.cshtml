@@ -1,0 +1,37 @@
+﻿@using Metawision.blog.Models;
+
+@{
+    var artList = articleManager.getAllArticle();
+    int i = 0;
+
+    int len = artList.ToArray().Length;
+    int lenn = len % 10;
+    @lenn
+
+    foreach (var art in artList)
+    {
+
+        if (i <= 9)
+        {
+            <div class="container-fluid">
+                <div>
+                    <img src="@art.pic" width="100%" />
+                </div>
+                <br />
+                <div>
+                    <h4 style="direction:rtl">@art.date</h4>
+                </div>
+                <div>
+                    <h2>
+                        <a href="~/Home/index/@art.Id">@art.title</a>
+                    </h2>
+                </div>
+                <div>
+                    <p>@art.body</p>
+                </div>
+                <hr />
+            </div>
+        }
+        i = i + 1;
+    }
+}
