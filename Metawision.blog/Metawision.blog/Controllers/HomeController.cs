@@ -31,6 +31,11 @@ namespace Metawision.blog.Controllers
 
             return View();
         }
+        [HttpGet]
+        public ActionResult article (int id)
+        {
+            return View(id);
+        }
         
     }
 }
