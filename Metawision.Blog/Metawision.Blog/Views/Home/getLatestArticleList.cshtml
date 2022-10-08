@@ -4,7 +4,16 @@
 
 
 @{
-    int page = Model;
+    int page = 1;
+
+    try
+    {
+        page = Model;
+    }
+    catch
+     {
+        page = 1;
+     }
     int pSize = 10;
     int pStart = (page - 1) * pSize + 1;
     int pEnd = (page) * pSize;
