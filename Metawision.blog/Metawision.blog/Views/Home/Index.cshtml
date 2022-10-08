@@ -1,5 +1,6 @@
 ﻿@using Metawision.blog.Models;
 
+@model int
 
 @{
     ViewBag.Title = "Home Page";
@@ -14,62 +15,31 @@
         @DateTime.Now
         <hr />
         t = @i*@
-
+    int id = Model;
 }
 
-@Request.RequestContext.HttpContext.Session.SessionID
 <br />
-@Temp.GetSessionID()
-<div class="row">
-    <div class="col-md-3" style="background-color:#0099ff">
-        <input type="text" class="input-lg" id="tempTxt"/>
-        @*<button type="button" class="btn btn-lg btn-primary" onclick="showMessage()" >show message</button>*@
-        @*<button type="button" class="btn btn-lg btn-primary" id="showBtn" >show message</button>*@
-        <button type="button" class="btn btn-lg btn-primary" id="slideUpBtn" >slide up</button>
-    </div>
-    <div class="col-lg-5 mohsen" style="background-color:#ff7500">
-        5
-    </div>
-    <div class="col-lg-5" style="background-color:#ff0000">
-        4
-    </div>
-    <div class="col-lg-12 mohsen" style="background-color:#00ff00">
-        vdgdfgdfg
-        <br />
-        ;lklfks;lfksl;kfd
-    </div>
+<div class="container-fluid">
+    <div class="col-md-8 col-lg-offset-2" style="background-color: #0099ff; height: 600px;">
 
+    </div>
+    <div class="col-lg-8 col-lg-offset-2" style="background-color: #fff; height: 50px;">
+
+    </div>
+    <div class="container-fluid col-lg-8 col-lg-offset-2">
+        <div class="col-lg-3" style="background-color:#ff0000; height:auto;">
+
+        </div>
+        <div class="col-lg-9" style="background-color: #e3e6e8; height: auto;">
+            @{
+                Html.RenderPartial("getLatestArticleList", id);
+             }
+        </div>
+    </div>
 </div>
 
 
 <script>
-    //$("document").ready(function () {
   
-
-    //});
-
-
-    $("#showBtn").click(function () {
-        console.log($("#tempTxt").val());
-    });
-    
-
-    $("#slideUpBtn").click(function () {
-       // $(".mohsen").slideUp(500);
-        //console.log($(this).closest("div").css("background-color"));
-        console.log($(this).closest("div").find("input").val());
-
-
-    });
-
-
-    function showMessage() {
-        var textBox = document.getElementById("tempTxt");
-        var str = textBox.value;
-        console.log(str);
-    }
-
-
-
 
 </script>
