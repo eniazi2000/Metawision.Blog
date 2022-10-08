@@ -1,0 +1,25 @@
+﻿@using Metawision.Blog.Models.bl;
+@model int
+
+
+
+
+
+        @{
+            var childList = commentsManager.getParentCommentChilds(Model);
+            foreach (var item in childList)
+            {
+
+                <div style="border:3px solid #808080" ; padding:10px; margin-top:10px;">
+                    <p>@item.body</p>
+                    @{
+                       
+                        Html.RenderPartial("showChildsComments", item.id);
+                     }
+             </div>
+
+
+                    }
+
+                    }
+

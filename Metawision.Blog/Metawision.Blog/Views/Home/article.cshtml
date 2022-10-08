@@ -1,0 +1,29 @@
+﻿@using Metawision.blog.Models;
+@{
+    ViewBag.Title = "article";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model int
+@{ 
+    var item = articleManager.getArticle(Model);
+}
+
+@if (item != null && item.state==2) //'state منتشر شده باشه
+{ 
+<h2>@item.title</h2>
+<p>@item.body</p>
+
+  
+<hr/>
+<sapan>@item.date.ToLongDateString() @item.date.ToLongTimeString()</sapan> 
+<hr />
+}
+
+@{ 
+
+
+    Html.RenderPartial("getComments", Model);
+    <hr/>
+    Html.RenderPartial("showArticleAllComments", Model);
+
+}
