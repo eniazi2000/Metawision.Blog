@@ -2,17 +2,17 @@
 @model int
 
 
-<div style="border:2px solid #ccc; padding: 10px;">
+<div style="border:solid 2px #ff0000 ; padding: 10px;">
     @{ 
         var parentList = commentsManager.getArticleAllParentComments(Model);
         foreach (var item in parentList)
         {
             <p>@item.body</p>
             Html.RenderPartial("getReplyComments", item.id);
-            Html.RenderPartial("showChildsComments",item.id);
+           Html.RenderPartial("showChildComments", item.id);
             <hr/>
         }
 
     }
 
-    <</div>>
+    </div>

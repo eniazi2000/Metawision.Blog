@@ -10,11 +10,12 @@
             foreach (var item in childList)
             {
 
-                <div style="border:3px solid #808080" ; padding:10px; margin-top:10px;">
+                <div style="border:dotted 3px #00ff21" ; padding:10px; margin-top:10px;">
                     <p>@item.body</p>
+                    <hr/>
                     @{
-                       
-                        Html.RenderPartial("showChildsComments", item.id);
+                        Html.RenderPartial("getReplyComments", item.id);
+                        Html.RenderPartial("showChildComments", item.id);
                      }
              </div>
 

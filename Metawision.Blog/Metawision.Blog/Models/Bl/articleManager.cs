@@ -10,7 +10,7 @@ namespace Metawision.Blog.Models
         public static List<article> getAllArticle()
         {
             DataClasses1DataContext db = new DataClasses1DataContext();
-            return db.articles.OrderByDescending(a => a.date).ToList();
+            return db.articles.OrderByDescending(a =>a.date).ToList();
         }
         public static article getArticle(int id)
         {

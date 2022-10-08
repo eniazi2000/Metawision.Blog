@@ -10,6 +10,7 @@ namespace Metawision.Blog.Models.bl
         public static void saveComments (comment m) // yadet nare bool kon try catch bzar
         {
             DataClasses1DataContext database = new DataClasses1DataContext();
+            m.date = DateTime.Now;
             database.comments.InsertOnSubmit(m);
             database.SubmitChanges();
         }

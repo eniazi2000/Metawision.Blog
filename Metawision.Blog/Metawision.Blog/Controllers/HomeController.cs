@@ -41,6 +41,7 @@ namespace Metawision.Blog.Controllers
         [HttpPost]
        public ActionResult saveComments(comment model)
         {
+            
             commentsManager.saveComments(model);
             
             return RedirectToAction("article", new { id = model.idArticle });
