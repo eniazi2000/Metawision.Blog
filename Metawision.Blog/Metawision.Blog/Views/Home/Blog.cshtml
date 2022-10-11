@@ -1,0 +1,50 @@
+﻿@using Metawision.Blog.Models;
+
+@{
+    ViewBag.Title = "Blog";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+
+}
+
+<h2>بلاگ متاویژن</h2>
+
+
+
+@{  
+    int pagenum = 1;
+    if (ViewContext.RouteData.Values["id"] != null)
+    {
+        pagenum = Convert.ToInt32(ViewContext.RouteData.Values["id"].ToString());
+    }
+
+
+
+}
+
+<br />
+<div class="container-fluid">
+    <div class="col-md-12" style="background-color: #0099ff; height: 600px;">
+     @pagenum
+    </div>
+    <div class="col-md-12" style="background-color: #fff; height: 50px;">
+
+    </div>
+    <div class="container-fluid col-lg-12">
+        <div class="col-md-3" style="background-color:#ff0000; height:auto;">
+
+        </div>
+        <div class="col-md-9" style="background-color: #e3e6e8; height: auto;">
+            @{
+                Html.RenderPartial("getLatestArticleList", pagenum);
+            }
+        </div>
+    </div>
+</div>
+
+
+<script>
+
+
+</script>
+

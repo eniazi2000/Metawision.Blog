@@ -16,6 +16,12 @@ namespace Metawision.Blog.Controllers
             return View(id);
         }
         [HttpGet]
+        public ActionResult Blog()
+        {
+
+                return View();
+        }
+        [HttpGet]
         public ActionResult Page(int id)
         {
             return View(id);
