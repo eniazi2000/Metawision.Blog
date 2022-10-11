@@ -1,0 +1,60 @@
+﻿@using Metawision.Blog.Models;
+@{
+    ViewBag.Title = "articleList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>articleList</h2>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>id</th>
+                        <th>title</th>
+                        <th>state</th>
+                        <th>idUser</th>
+                        <th>tools</th>
+
+                    </tr>
+
+                </thead>
+                <tbody>
+                    @{
+                        var list = articleManager.getAllArticle();
+                        int i = 1;
+                        foreach (var item in list)
+                        {
+                            <tr>
+                                <td>@i</td>
+                                <td>@item.Id</td>
+                                <td>@item.title</td>
+                                <td>@item.state</td>
+                                <td>@item.idUser</td>
+                                <td>
+                                    <a href="~/admin/DeleteArticle/@item.Id">Delete</a>
+                                    <a>Edit</a>
+                                </td>
+                            </tr>
+                            i++;
+                        }
+
+
+                    }
+
+                </tbody>
+            </table>
+
+        </div>
+
+    </div>
+</div>
+
+
+
+
+
+
+

@@ -46,5 +46,7 @@ namespace Metawision.Blog.Controllers
             
             return RedirectToAction("article", new { id = model.idArticle });
         }
+
+       
     }
 }

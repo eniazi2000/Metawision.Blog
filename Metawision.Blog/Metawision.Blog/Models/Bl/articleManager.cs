@@ -7,6 +7,8 @@ namespace Metawision.Blog.Models
 {
     public class articleManager
     {
+        public static object ViewBag { get; private set; }
+
         public static List<article> getAllArticle()
         {
             DataClasses1DataContext db = new DataClasses1DataContext();
@@ -90,6 +92,71 @@ namespace Metawision.Blog.Models
                 return false;
             }
         }
+
+        public static bool deletArticle(int index)
+        {
+            DataClasses1DataContext database = new DataClasses1DataContext();
+            try
+            {
+                var item = database.articles.Where(ar => ar.Id == index).FirstOrDefault();
+                if(item !=null)
+                {
+                    database.articles.DeleteOnSubmit(item);
+                    database.SubmitChanges();
+
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public static int nextarticle(int id)
+        {
+            DataClasses1DataContext database = new DataClasses1DataContext();
+            try
+            {
+                var nextArticle = articleManager.getAllArticle().OrderBy(i => i.Id).Where(i => i.Id > id).FirstOrDefault();
+
+                if (nextArticle != null)
+                    return nextArticle.Id;
+                else
+                    return -1;
+
+            }
+            catch
+            {
+                return -1;
+            }
+        }
+
+
+        public static int previousarticle(int id)
+        {
+            DataClasses1DataContext database = new DataClasses1DataContext();
+            try
+            {
+                var previousArticle = articleManager.getAllArticle().OrderByDescending(i => i.Id).Where(i => i.Id < id).FirstOrDefault();
+
+                if (previousArticle != null)
+                    return previousArticle.Id;
+                else
+                    return -1;
+
+            }
+            catch
+            {
+                return -1;
+            }
+        }
+
+
 
 
     }

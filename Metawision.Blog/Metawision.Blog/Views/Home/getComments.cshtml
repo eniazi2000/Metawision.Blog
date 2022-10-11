@@ -1,14 +1,17 @@
 ﻿@model int
-    <div style="border:solid 1px #00ffff; padding:10px;">
+    <div style="border: 1px solid #ccc; padding:10px;">
 
         <form method="post" action="~/home/saveComments">
             <div class="col-md-12">
-<textarea  name="body" style="height:200px; width:100%"></textarea>
-                </div>
+<textarea name="body" class="col-md-12" style="height:200px; width:100%;"></textarea>
+                
+            </div>
             <input type="text" name="idArticle" style="visibility:hidden; display:none;" value="@Model" />
             <input type="text" name="replyToId" style="visibility:hidden; display:none;" value="0" />
-            <input type="text" name="idUser" style="visibility:hidden; display:none;" value="1"/> 
-            @*از کجا میفهمه کدوم مدل رو بخونه*@
-            <button type="submit" class="btn btn-primary btn-sm btn-block">فرستادن دیدگاه</button>
+            <input type="text" name="idUser" style="visibility:hidden; display:none;" value="1" />
+           
+                <button type="submit" class="btn btn-primary btn-sm btn-block ">فرستادن دیدگاه</button>
+            
         </form>
+        
     </div>

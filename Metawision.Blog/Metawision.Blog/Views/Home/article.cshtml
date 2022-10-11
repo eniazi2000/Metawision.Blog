@@ -26,5 +26,31 @@
     Html.RenderPartial("getComments", Model);
     <hr />
     Html.RenderPartial("showArticleAllComments", Model);
-
 }
+
+
+
+<ul class="pager">
+
+    @{
+        var nextid = articleManager.nextarticle(Model);
+        if (nextid > 0)
+        {
+            var nextArticle = articleManager.getArticle(nextid);
+            <li class="next"><a href="~/home/article/@nextArticle.Id" class="next"> @nextArticle.title </a></li>
+
+            var previousid = articleManager.previousarticle(Model);
+            if (previousid > 0)
+            {
+                var previousArticle = articleManager.getArticle(previousid);
+                <li class="previous"><a href="~/home/article/@previousArticle.Id" class="previous"> @previousArticle.title </a></li>
+
+
+            }
+
+        }
+    }
+
+</ul>
+
+

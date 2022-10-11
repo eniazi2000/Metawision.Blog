@@ -30,5 +30,18 @@ namespace Metawision.Blog.Controllers
             articleManager.saveArticleToDatabase(newArticle);
             return View();
         }
+        [HttpGet]
+        public ActionResult articleList()
+        {
+            return View();
+        }
+        [HttpGet]
+        public ActionResult DeleteArticle(int id)
+        {
+            articleManager.deletArticle(id);
+            return View("articleList");
+        }
+      
+
     }
 }
