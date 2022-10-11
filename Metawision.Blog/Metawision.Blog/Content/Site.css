@@ -1,6 +1,7 @@
 ﻿body {
     padding-top: 50px;
     padding-bottom: 20px;
+    direction:rtl !important;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -23,3 +24,7 @@ select,
     max-width: 280px;
 }
 */
+
+.pagination > li > a, .pagination > li > span {
+    float: right !important;
+}
