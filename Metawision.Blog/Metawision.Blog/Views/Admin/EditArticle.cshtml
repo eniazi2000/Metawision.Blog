@@ -1,0 +1,28 @@
+﻿@using Metawision.Blog.Models;
+
+
+
+@model int
+
+@{
+    ViewBag.Title = "EditArticle";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var m = articleManager.getArticle(Model);
+    Html.RenderPartial("EdtArticlePartial", m.convertToArticle());
+}
+
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+<script>
+
+    $("document").ready(function () {
+        $("#myForm").trigger("reset");
+    });
+
+</script>
+
