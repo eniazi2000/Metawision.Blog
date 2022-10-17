@@ -4,17 +4,8 @@
 
 
 @{
-    int page = 1;
-
-    try
-    {
-        page = Model;
-    }
-    catch
-     {
-        page = 1;
-     }
-    int pSize = 10;
+    int page = Model;
+    int pSize = 1;
     int pStart = (page - 1) * pSize + 1;
     int pEnd = (page) * pSize;
 
@@ -23,7 +14,7 @@
     var slice = artList.Skip((page - 1) * pSize).Take(pSize);
     int pages = 0;
 
-    if (0 < len % 10 && len % 10 < 10)
+    if (0 < len % pSize && len % pSize < pSize)
     {
         pages = (len / pSize) + 1;
     }
@@ -45,7 +36,7 @@
             </div>
             <div>
                 <h2>
-                    <a href="~/Home/index/@art.Id">@art.title</a>
+                    <a href="~/Home/Blog/@art.Id">@art.title</a>
                 </h2>
             </div>
             <div>
@@ -54,24 +45,113 @@
             <hr />
         </div>
     }
-    <nav aria-label="Page navigation example">
-        <ul class="pagination">
-            <li class="page-item">
-                <a class="page-link" href="#" aria-label="Previous">
-                    <span aria-hidden="true">&laquo;</span>
-                    <span class="sr-only">Previous</span>
-                </a>
-            </li>
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item">
-                <a class="page-link" href="#" aria-label="Next">
-                    <span aria-hidden="true">&raquo;</span>
-                    <span class="sr-only">Next</span>
-                </a>
-            </li>
-        </ul>
-    </nav>
+}
+@{
+    if (0 < page && page < 5)
+    {
+        <nav aria-label="Page navigation" class="text-center">
+            <ul class="pagination">
 
+                @{
+                    if (page > 1)
+                    {
+                        <li>
+                            <a href="#" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                    }
+                    for (var i = 1; i < page + 3; i++)
+                    {
+                        if (i == page)
+                        {
+                            <li class="active"><a href="~/Home/Blog/@i">@i</a></li>
+                        }
+                        else
+                        {
+                            <li><a href="~/Home/Blog/@i">@i</a></li>
+                        }
+                    }
+                    <li><a>...</a></li>
+                    <li><a href="~/Home/Blog/@pages">@pages</a></li>
+
+                }
+                <li>
+                    <a href="#" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    }
+    if (4 < page && page < pages - 3)
+    {
+        <nav aria-label="Page navigation" class="text-center">
+            <ul class="pagination">
+                <li>
+                    <a href="#" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                <li><a href="~/Home/Blog/1">1</a></li>
+                <li><a>...</a></li>
+                @{
+                    for (var i = page - 2; i < page + 3; i++)
+                    {
+                        if (i == page)
+                        {
+                            <li class="active"><a href="~/Home/Blog/@i">@i</a></li>
+                        }
+                        else
+                        {
+                            <li><a href="~/Home/Blog/@i">@i</a></li>
+                        }
+                    }
+                    <li><a>...</a></li>
+                    <li><a href="~/Home/Blog/@pages">@pages</a></li>
+                }
+                <li>
+                    <a href="#" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    }
+    if ( pages - 4 < page && page <= pages )
+    {
+        <nav aria-label="Page navigation" class="text-center">
+            <ul class="pagination">
+                <li>
+                    <a href="#" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                <li><a href="~/Home/Blog/1">1</a></li>
+                <li><a>...</a></li>
+                @{
+                    for (var i = page - 2; i < pages + 1; i++)
+                    {
+                        if (i == page)
+                        {
+                            <li class="active"><a href="~/Home/Blog/@i">@i</a></li>
+                        }
+                        else
+                        {
+                            <li><a href="~/Home/Blog/@i">@i</a></li>
+                        }
+                    }
+
+                    if (page < pages)
+                    {
+                        <li>
+                            <a href="#" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    }
+                }
+            </ul>
+        </nav>
+    }
 }

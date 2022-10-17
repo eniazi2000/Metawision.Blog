@@ -1,27 +1,31 @@
 ﻿@using Metawision.Blog.Models;
 
-@model int
-
 @{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "Blog";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+
 }
 
-@{
-//var t = new Temp();
-//Temp t = new Temp();
-//var i = t.sum(10, 5);
-    @*var i = Temp.sumStatic(10, 5);
+<h2>بلاگ متاویژن</h2>
 
-        @DateTime.Now
-        <hr />
-        t = @i*@
-    int id = Model;
+
+
+@{  
+    int pagenum = 1;
+    if (ViewContext.RouteData.Values["id"] != null)
+    {
+        pagenum = Convert.ToInt32(ViewContext.RouteData.Values["id"].ToString());
+    }
+
+
+
 }
 
 <br />
 <div class="container-fluid">
     <div class="col-md-12" style="background-color: #0099ff; height: 600px;">
-
+     @pagenum
     </div>
     <div class="col-md-12" style="background-color: #fff; height: 50px;">
 
@@ -32,14 +36,15 @@
         </div>
         <div class="col-md-9" style="background-color: #e3e6e8; height: auto;">
             @{
-                Html.RenderPartial("getLatestArticleList", id);
-             }
+                Html.RenderPartial("getLatestArticleList", pagenum);
+            }
         </div>
     </div>
 </div>
 
 
 <script>
-  
+
 
 </script>
+
