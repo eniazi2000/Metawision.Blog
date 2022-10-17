@@ -41,7 +41,20 @@ namespace Metawision.Blog.Controllers
             articleManager.deletArticle(id);
             return View("articleList");
         }
-      
+        [HttpGet]
+        public ActionResult EditArticle(int id)
+        {
+
+            return View(id);
+        }
+
+        [HttpPost]
+        public ActionResult EditArticle(article model)
+            
+        {
+
+            return RedirectToAction("article" , "home" , new { id = model.Id });
+        }
 
     }
 }

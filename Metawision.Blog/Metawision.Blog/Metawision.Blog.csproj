@@ -136,6 +136,7 @@
     <Compile Include="Models\Bl\usersManager.cs" />
     <Compile Include="Models\DTO\articleDTO.cs" />
     <Compile Include="Models\DTO\tagDTO.cs" />
+    <Compile Include="Models\extensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -189,6 +190,8 @@
     <Content Include="Views\Home\showArticleAllComments.cshtml" />
     <Content Include="Views\Home\showChildComments.cshtml" />
     <Content Include="Views\Admin\articleList.cshtml" />
+    <Content Include="Views\Admin\EditArticle.cshtml" />
+    <Content Include="Views\Admin\EdtArticlePartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
