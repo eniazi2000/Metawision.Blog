@@ -190,8 +190,13 @@
     <Content Include="Views\Home\showArticleAllComments.cshtml" />
     <Content Include="Views\Home\showChildComments.cshtml" />
     <Content Include="Views\Admin\articleList.cshtml" />
+<<<<<<< Updated upstream
     <Content Include="Views\Admin\EditArticle.cshtml" />
     <Content Include="Views\Admin\EdtArticlePartial.cshtml" />
+=======
+    <Content Include="Views\Home\Blog.cshtml" />
+    <Content Include="Views\Home\postsInSlider.cshtml" />
+>>>>>>> Stashed changes
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
