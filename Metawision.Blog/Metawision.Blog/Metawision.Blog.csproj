@@ -190,6 +190,7 @@
     <Content Include="Views\Home\showChildComments.cshtml" />
     <Content Include="Views\Admin\articleList.cshtml" />
     <Content Include="Views\Home\Blog.cshtml" />
+    <Content Include="Views\Home\postsInSlider.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
