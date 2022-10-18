@@ -24,8 +24,10 @@
 
 <br />
 <div class="container-fluid">
-    <div class="col-md-12" style="background-color: #0099ff; height: 600px;">
-     @pagenum
+    <div class="col-md-12" style="padding:0;">
+        @{
+            Html.RenderPartial("postsInSlider");
+        }
     </div>
     <div class="col-md-12" style="background-color: #fff; height: 50px;">
 

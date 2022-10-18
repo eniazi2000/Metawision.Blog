@@ -5,7 +5,7 @@
 
 @{
     int page = Model;
-    int pSize = 1;
+    int pSize = 5;
     int pStart = (page - 1) * pSize + 1;
     int pEnd = (page) * pSize;
 
@@ -22,7 +22,6 @@
     {
         pages = (len / pSize);
     }
-    @pages
 
     foreach (var art in slice)
     {
