@@ -54,6 +54,10 @@ namespace Metawision.Blog.Controllers
 
             return RedirectToAction("article" , "home" , new { id = model.Id });
         }
+        public ActionResult contactUsList()
+        {
+            return View();
+        }
 
     }
 }

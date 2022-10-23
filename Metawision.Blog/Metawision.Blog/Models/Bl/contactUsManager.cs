@@ -19,7 +19,7 @@ namespace Metawision.Blog.Models
         public static List<contact> GetContact()
         {
             DataClasses1DataContext database = new DataClasses1DataContext();
-            return database.contacts.OrderByDescending(tp=> tp.date).ToList();
+            return database.contacts.OrderByDescending(tp => tp.date).ToList();
         }
 
 

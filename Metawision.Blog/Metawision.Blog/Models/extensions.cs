@@ -7,7 +7,6 @@ namespace Metawision.Blog.Models
 {
     public static class extensions
     {
-
         public static article convertToArticle(this articleDTO val)
         {
             article item = new article

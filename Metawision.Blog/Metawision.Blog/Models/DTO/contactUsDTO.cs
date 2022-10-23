@@ -9,7 +9,7 @@ namespace Metawision.Blog.Models
 {
     public class contactUsDTO
     {
-        [Required(ErrorMessage ="نام اجباری است")]
+        [Required(ErrorMessage = "نام اجباری است")]
         [DisplayName("نام")]
         public string name { get; set; }
 

@@ -47,6 +47,11 @@ select,
     border-bottom-right-radius: 0px !important;
 }
 
+.resizeimage {
+    width: 100%;
+    object-fit: fill !important;
+}
+
 .slider-cell {
     padding: 0px !important;
 }
