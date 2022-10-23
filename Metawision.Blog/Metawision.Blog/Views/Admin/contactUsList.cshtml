@@ -1,0 +1,48 @@
+﻿@using Metawision.Blog.Models;
+
+@{
+    ViewBag.Title = "contactUsList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>contactUsList</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>id</th>
+            <th>نام</th>
+            <th>نام خانوادگی</th>
+            <th>ایمیل</th>
+            <th>شماره تلفن</th>
+            <th>پیام</th>
+            <th>تاریخ</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @{
+            var list = contactUsManager.GetContact();
+            int i = 1;
+            foreach (var item in list)
+            {
+                <tr>
+                    <td>@i</td>
+                    <td>@item.Id</td>
+                    <td>@item.name</td>
+                    <td>@item.family</td>
+                    <td>@item.email</td>
+                    <td>@item.phone</td>
+                    <td>@item.txt</td>
+                    <td>@item.date</td>
+
+
+                </tr>
+                i++;
+            }
+
+        }
+
+    </tbody>
+</table>
+

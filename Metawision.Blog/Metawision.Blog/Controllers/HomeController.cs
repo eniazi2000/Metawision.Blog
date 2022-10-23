@@ -15,17 +15,20 @@ namespace Metawision.Blog.Controllers
 
             return View(id);
         }
+
         [HttpGet]
         public ActionResult Blog()
         {
 
                 return View();
         }
+
         [HttpGet]
         public ActionResult Page(int id)
         {
             return View(id);
         }
+
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
@@ -39,11 +42,27 @@ namespace Metawision.Blog.Controllers
 
             return View();
         }
+
         [HttpGet]
         public ActionResult article (int id)
         {
-            return View(id);
+            if (articleManager.getArticle(id) == null)
+            {
+                Response.StatusCode = 404;
+                return View("PageNotFound");
+            }
+            else
+            {
+                return View(id);
+            }
         }
+
+        [HttpGet]
+        public ActionResult showLatestPosts()
+        {
+            return View();
+        }
+
         [HttpPost]
        public ActionResult saveComments(comment model)
         {
@@ -52,7 +71,16 @@ namespace Metawision.Blog.Controllers
             
             return RedirectToAction("article", new { id = model.idArticle });
         }
-
-       
+        [HttpGet]
+        public ActionResult contactUs()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult contactUs(contact cu)
+        {
+            contactUsManager.saveContactUsToDatabase(cu);
+            return View();
+        }
     }
 }
