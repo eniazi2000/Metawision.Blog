@@ -44,6 +44,14 @@ namespace Metawision.Blog.Controllers
         {
             return View(id);
         }
+
+        [HttpGet]
+        public ActionResult showLatestPosts()
+        {
+            return View();
+        }
+
+
         [HttpPost]
        public ActionResult saveComments(comment model)
         {
@@ -52,7 +60,21 @@ namespace Metawision.Blog.Controllers
             
             return RedirectToAction("article", new { id = model.idArticle });
         }
+        [HttpGet]
+       public ActionResult contactUs()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult contactUs(contact cu)
+        {
+            contactUsManager.saveContactUsToDatabase(cu);
+            return View();
+        }
+
 
        
+
     }
 }

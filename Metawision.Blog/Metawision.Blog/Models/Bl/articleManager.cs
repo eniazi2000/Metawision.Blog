@@ -12,12 +12,32 @@ namespace Metawision.Blog.Models
         public static List<article> getAllArticle()
         {
             DataClasses1DataContext db = new DataClasses1DataContext();
-            return db.articles.OrderByDescending(a =>a.date).ToList();
+            return db.articles.OrderByDescending(a => a.date).ToList();
+                
         }
+
+        public static List<article> latestThreePosts()
+        {
+            DataClasses1DataContext db = new DataClasses1DataContext();
+            return db.articles.OrderByDescending(m => m.date).Take(3).ToList();
+
+        }
+
+        public static void addViewCountForAricle(int id)
+        {
+            DataClasses1DataContext database = new DataClasses1DataContext();
+            var p = database.articles.Where(b => b.Id == id).FirstOrDefault();
+            p.viewCount = p.viewCount + 1;
+            database.SubmitChanges();
+        }
+        // چرا کار نکرد؟
+
         public static article getArticle(int id)
         {
             return getAllArticle().Where(a => a.Id == id).FirstOrDefault();
         }
+
+
         public static bool saveArticleToDatabase(articleDTO model)
         {
             try

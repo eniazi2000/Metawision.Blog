@@ -44,3 +44,16 @@ select,
     border-top-right-radius: 0px !important;
     border-bottom-right-radius: 0px !important;
 }
+.resizeimage {
+    width: 100%;
+    object-fit: fill !important;
+}
+/*.latestArticle {
+    background-color: #333333 !important;
+    border: solid 3px #333333;
+    border-radius: 5% ;
+    width: 25%;
+}
+*/
+
+

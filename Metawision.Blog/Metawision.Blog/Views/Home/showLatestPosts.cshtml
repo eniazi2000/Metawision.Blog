@@ -1,0 +1,33 @@
+﻿
+
+
+@using Metawision.Blog.Models;
+
+
+<div class="latestArticle">
+    <h2 style=" color: white;">آخرین نوشته‌ها</h2>
+    <hr style=" width: 90%; height: 2px; border-width: 0; color: #fbdb24; background-color: #fbdb24" />
+
+    @{
+        var list = articleManager.latestThreePosts();
+        int i = 1;
+        foreach (var item in list)
+        {
+            <div style="display:inline-flex">
+                <a href="~/home/article/@item.Id"> <img src="@item.pic" width="80" height="80" style="object-fit:cover ; padding:10px; "> </a>
+                <div style="margin-right:5px;">
+                    <h4> <a style=" color:#fbdb24;" href="~/home/article/@item.Id">@item.title</a></h4>
+                </div>
+            </div>
+            <hr style=" width: 90%;   border: dashed 0.2px;color: white; " />
+            i++;
+        }
+
+
+    }
+
+
+
+
+</div>
+
