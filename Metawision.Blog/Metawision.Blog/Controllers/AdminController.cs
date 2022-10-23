@@ -50,7 +50,6 @@ namespace Metawision.Blog.Controllers
 
         [HttpPost]
         public ActionResult EditArticle(article model)
-            
         {
 
             return RedirectToAction("article" , "home" , new { id = model.Id });
