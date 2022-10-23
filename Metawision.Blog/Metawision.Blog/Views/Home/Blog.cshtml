@@ -1,15 +1,38 @@
 ﻿@using Metawision.Blog.Models;
 
 @{
+    
     ViewBag.Title = "Blog";
     Layout = "~/Views/Shared/_Layout.cshtml";
 
 
 }
-
-<h2>بلاگ متاویژن</h2>
-
-
+<div class="page-title">
+    <div class="container">
+        <div class="title-container">
+            <div class="in-page-title">
+                <div class="title-headings">
+                    <h1>بلاگ</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@*<div class="page-title page-title-video style2 text-right" data-slurve="0,0 -170,0 -100,-180,80 0,0">
+    <svg class="slurve-svg" top="-180px" left="-170px" width="1853" height="529" viewBox="-170 -180 1853 529" style="top: -180px; left: -170px;"><path d="M0,0 Q0,0 0,0 L1413,0 Q1413,0 1413,0 L1483,89 Q1483,169 1403,169 L0,349 Q0,349 0,349 Z"></path></svg><svg class="slurve-svg respons_svg"><rect width="100%" height="100%"></rect></svg>
+    <div class="video-wrap">
+        <video poster="" preload="auto" loop="" autoplay="" muted="" __idm_id__="729089" style="width: 1583px; height: 890.438px; top: -270.719px;"><source src="https://metawision.com/wp-content/uploads/2022/01/metavision-slider.mp4" type="video/mp4"></video>
+    </div>
+    <div class="container skrollr skrollable skrollable-between" data-0="opacity:1; transform:translateY(0px);" data-300="opacity:0; transform:translateY(230px);" style="opacity: 1; transform: translateY(0px);">
+        <div class="title-container">
+            <div class="in-page-title">
+                <div class="title-headings">
+                    <h1>وبلاگ</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>*@
 
 @{  
     int pagenum = 1;
@@ -24,20 +47,31 @@
 
 <br />
 <div class="container-fluid">
-    <div class="col-md-12" style="background-color: #0099ff; height: 600px;">
-     @pagenum
+    <div class="row" style="padding:0;">
+        @{
+            Html.RenderPartial("postsInSlider");
+        }
     </div>
-    <div class="col-md-12" style="background-color: #fff; height: 50px;">
+    <div class="col-md-12" style="height: 50px;">
 
     </div>
-    <div class="container-fluid col-lg-12">
-        <div class="col-md-3" style="background-color:#ff0000; height:auto;">
-
+    <div class="container-fluid col-lg-12" style="padding: 0px">
+        <div class="col-md-3" style="height:500px; padding:0px 15px 0px 0px;">
+            <div class="section-title">
+                <h3>جدیدترین مقالات متاورس</h3>
+            </div>
+            <div class="article-feed">
+                @{
+                    Html.RenderPartial("getRelatedArticlesList");
+                }
+            </div>
         </div>
-        <div class="col-md-9" style="background-color: #e3e6e8; height: auto;">
-            @{
-                Html.RenderPartial("getLatestArticleList", pagenum);
-            }
+        <div class="col-md-9" style="height: auto; padding: 0px 0px 0px 15px;">
+            <div class="article-feed">
+                @{
+                    Html.RenderPartial("getLatestArticleList", pagenum);
+                }
+            </div>
         </div>
     </div>
 </div>

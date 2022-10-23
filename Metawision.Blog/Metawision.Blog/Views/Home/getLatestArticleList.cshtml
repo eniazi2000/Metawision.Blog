@@ -5,7 +5,7 @@
 
 @{
     int page = Model;
-    int pSize = 1;
+    int pSize = 5;
     int pStart = (page - 1) * pSize + 1;
     int pEnd = (page) * pSize;
 
@@ -22,11 +22,10 @@
     {
         pages = (len / pSize);
     }
-    @pages
 
     foreach (var art in slice)
     {
-        <div class="container-fluid">
+        <div>
             <div>
                 <img src="@art.pic" width="100%" />
             </div>
@@ -35,7 +34,7 @@
                 <h4 style="direction:rtl">@art.date</h4>
             </div>
             <div>
-                <h2>
+                <h2 class="article-title">
                     <a href="~/Home/Blog/@art.Id">@art.title</a>
                 </h2>
             </div>

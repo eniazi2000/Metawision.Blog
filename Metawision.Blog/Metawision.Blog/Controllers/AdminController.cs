@@ -35,9 +35,6 @@ namespace Metawision.Blog.Controllers
         {
             return View();
         }
-
-
-
         [HttpGet]
         public ActionResult DeleteArticle(int id)
         {
@@ -53,20 +50,10 @@ namespace Metawision.Blog.Controllers
 
         [HttpPost]
         public ActionResult EditArticle(article model)
-
         {
 
-            return RedirectToAction("article", "home", new { id = model.Id });
+            return RedirectToAction("article" , "home" , new { id = model.Id });
         }
-
-        [HttpGet]
-
-        public ActionResult contactUsList()
-        {
-            return View();
-        }
-
- 
 
     }
 }

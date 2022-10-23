@@ -1,0 +1,22 @@
+﻿@using Metawision.Blog.Models;
+
+@{
+
+
+    var artList = articleManager.getAllArticle().Take(10);
+
+    foreach (var art in artList)
+    {
+        <div>
+            <div>
+                <img src="@art.pic" width="100%" />
+            </div>
+            <br />
+            <div>
+                <h2 class="article-title-sb">
+                    <a href="~/Home/Blog/@art.Id">@art.title</a>
+                </h2>
+            </div>
+        </div>
+    }
+}

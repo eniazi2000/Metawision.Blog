@@ -1,7 +1,9 @@
 ﻿body {
     padding-top: 50px;
     padding-bottom: 20px;
-    direction:rtl !important;
+    direction: rtl !important;
+    color: #fff !important;
+    background-color: #0c0c0c !important;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -44,16 +46,123 @@ select,
     border-top-right-radius: 0px !important;
     border-bottom-right-radius: 0px !important;
 }
-.resizeimage {
-    width: 100%;
-    object-fit: fill !important;
-}
-/*.latestArticle {
-    background-color: #333333 !important;
-    border: solid 3px #333333;
-    border-radius: 5% ;
-    width: 25%;
-}
-*/
 
+.slider-cell {
+    padding: 0px !important;
+}
+
+.cell-cover {
+    background-size: cover;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+/*    width: 100%;
+    height: 100%;*/
+}
+
+.cell-title {
+    position: absolute;
+    bottom: 0px;
+    right: 0;
+    padding: 0 10px;
+    text-align: right;
+    z-index: 1;
+    color: gold;
+    /* width: 100%; */
+}
+
+a {
+    text-decoration: none !important;
+    color: #fbdb24 !important;
+}
+
+a:hover {
+    text-decoration: none;
+    color: #fbdb24;
+}
+
+.slider-container{
+    display: flex;
+}
+
+.article-feed {
+    height: auto;
+    width: 100%;
+}
+
+.section-title {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.article-title {
+    font-size: 24px !important;
+}
+
+body {
+    font-family: "Vazir", Helvetica, Arial, sans-serif !important;
+    font-size: 16px !important;
+}
+
+.title-holder {
+    height: 6.5rem;
+    width: 100%;
+}
+
+.article-title-sb {
+    margin-top: 0px;
+    font-size: 18px;
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+
+.page-title .in-page-title {
+    height: 349px;
+}
+
+.page-title .title-container .in-page-title {
+    display: table-cell;
+    vertical-align: middle;
+    position: relative;
+}
+
+.page-title .title-container {
+    position: relative;
+    z-index: 3;
+    display: table;
+    width: 100%;
+    height: 200px;
+}
+
+.navbar-nav {
+    float: right !important;
+}
+
+.navbar-nav > li {
+    float: right !important;
+}
+
+.nav {
+    padding-right: 15px !important;
+    padding-left: 40px !important;
+}
+
+.navbar-brand {
+    float: right !important;
+}
+
+.navbar-toggle {
+    position: absolute !important;
+    left: 0px;
+    float: left !important;
+    margin-left: 15px;
+    margin-right: 0px !important;
+}
+
+.navbar-header {
+    float: right !important;
+}
+
+.navbar-collapse {
+    width: 100% !important;
+}
 
