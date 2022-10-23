@@ -18,6 +18,10 @@ namespace Metawision.Blog.Models
         {
             return GetCategories().Where(c => c.idParent == idParent).ToList();
         }
+        public static category GetCategory(int id)
+        {
+            return GetCategories().Where(c => c.id == id).FirstOrDefault();
+        }
         public static bool saveCategoryToDatabase(categoryDTO model)
         {
             try

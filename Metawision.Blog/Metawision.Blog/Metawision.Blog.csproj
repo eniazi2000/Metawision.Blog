@@ -132,9 +132,11 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Bl\articleManager.cs" />
+    <Compile Include="Models\Bl\categoryManager.cs" />
     <Compile Include="Models\Bl\commentsManager.cs" />
     <Compile Include="Models\Bl\usersManager.cs" />
     <Compile Include="Models\DTO\articleDTO.cs" />
+    <Compile Include="Models\DTO\categoryDTO.cs" />
     <Compile Include="Models\DTO\tagDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -191,6 +193,8 @@
     <Content Include="Views\Admin\articleList.cshtml" />
     <Content Include="Views\Home\Blog.cshtml" />
     <Content Include="Views\Home\postsInSlider.cshtml" />
+    <Content Include="Views\Admin\Categories.cshtml" />
+    <Content Include="Views\Admin\CategoriesList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

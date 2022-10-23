@@ -1,4 +1,5 @@
 ﻿using Metawision.Blog.Models;
+using Metawision.Blog.Models.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -54,6 +55,18 @@ namespace Metawision.Blog.Controllers
         {
 
             return RedirectToAction("article" , "home" , new { id = model.Id });
+        }
+        
+        [HttpGet]
+        public ActionResult Categories()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Categories(categoryDTO model)
+        {
+            var res = categoryManager.saveCategoryToDatabase(model);
+            return View();
         }
 
     }

@@ -1,0 +1,40 @@
+﻿@using Metawision.Blog.Models;
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>نام</th>
+                            <th>دسته</th>
+                            <th>ابزار</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            var list = categoryManager.GetCategories();
+                            foreach (var item in list)
+                {
+                    <tr>
+                        <td>@item.id</td>
+                        <td>@item.title</td>
+                        @if (item.idParent == 0)
+                        {
+                        <td>شاخه اصلی</td>
+                        }
+                        else
+                        {
+                        <td>@categoryManager.GetCategory(item.idParent).title</td>
+                        }
+                        <td></td>
+                    </tr>
+                }
+
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
