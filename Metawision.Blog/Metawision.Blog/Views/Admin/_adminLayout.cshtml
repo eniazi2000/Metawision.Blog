@@ -1,0 +1,219 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Metawision</title>
+    @Styles.Render("~/Content/admincss")
+    @Scripts.Render("~/bundles/modernizr")
+    <link href="~/lib/font-awesome/css/all.css" rel="stylesheet" />
+    <link rel="icon" href="~/Metawision.ico" />
+
+    <title>Collapsible sidebar using Bootstrap 4</title>
+
+    <!-- Bootstrap CSS CDN -->
+    @*<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">*@
+
+    <!-- Font Awesome JS -->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
+
+</head>
+<body>
+    <div class="wrapper">
+        <!-- Sidebar  -->
+        <nav id="sidebar">
+            <div class="sidebar-header">
+                <h3>بلاگ متاویژن</h3>
+                <strong>MW</strong>
+            </div>
+
+            <ul class="list-unstyled components">
+                <li class="main-item active">
+                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                        <i class="fas fa-bookmark"></i>
+                        <span class="sidebar-titel">پیشخوان</span>
+                    </a>
+                    <ul class="collapse list-unstyled" id="homeSubmenu">
+                        <li>
+                            <a href="#">خانه</a>
+                        </li>
+                        <li>
+                            <a href="#">به‌روزرسانی</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="main-item">
+                    <a href="#postSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                        <i class="fas fa-file"></i>
+                        <span class="sidebar-titel">نوشته‌ها</span>
+                    </a>
+                    <ul class="collapse list-unstyled" id="postSubmenu">
+                        <li>
+                            <a href="#">همه نوشته‌ها</a>
+                        </li>
+                        <li>
+                            <a href="#">افزودن نوشته‌</a>
+                        </li>
+                        <li>
+                            <a href="#">دسته‌ها</a>
+                        </li>
+                        <li>
+                            <a href="#">برچسب‌ها</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="main-item">
+                    <a href="#mediaSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                        <i class="fas fa-image"></i>
+                        <span class="sidebar-titel">رسانه</span>
+                    </a>
+                    <ul class="collapse list-unstyled" id="mediaSubmenu">
+                        <li>
+                            <a href="#">کتابخانه</a>
+                        </li>
+                        <li>
+                            <a href="#">افزودن</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="main-item">
+                    <a href="#userSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                        <i class="fas fa-user"></i>
+                        <span class="sidebar-titel">کاربران</span>
+                    </a>
+                    <ul class="collapse list-unstyled" id="userSubmenu">
+                        <li>
+                            <a href="#">همه کاربران</a>
+                        </li>
+                        <li>
+                            <a href="#">افزودن</a>
+                        </li>
+                        <li>
+                            <a href="#">شناسنامه</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="main-item">
+                    <a href="#commentSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                        <i class="fas fa-comment"></i>
+                        <span class="sidebar-titel">دیدگاه‌ها</span>
+                    </a>
+                    <ul class="collapse list-unstyled" id="commentSubmenu">
+                        <li>
+                            <a href="#">ایمیل‌ها</a>
+                        </li>
+                        <li>
+                            <a href="#">دیدگاه‌ها</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="main-item">
+                    <a href="#settingSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                        <i class="fas fa-cog"></i>
+                        <span class="sidebar-titel">تنطیمات</span>
+                    </a>
+                    <ul class="collapse list-unstyled" id="settingSubmenu">
+                        <li>
+                            <a href="#">‌عمومی 1</a>
+                        </li>
+                        <li>
+                            <a href="#">عمومی 2</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+
+            @*<ul class="list-unstyled CTAs">
+                <li>
+                    <a href="https://bootstrapious.com/tutorial/files/sidebar.zip" class="download">Download source</a>
+                </li>
+                <li>
+                    <a href="https://bootstrapious.com/p/bootstrap-sidebar" class="article">Back to article</a>
+                </li>
+            </ul>*@
+        </nav>
+
+        <!-- Page Content  -->
+        <div id="content">
+
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="container-fluid container-fliud-costume">
+
+                    <button type="button" id="sidebarCollapse" class="btn btn-mw">
+                        <i class="fas fa-align-left"></i>
+                        <span id="colapstext">منو بسته</span>
+                    </button>
+                    <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="fas fa-align-justify"></i>
+                    </button>
+
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="nav navbar-nav ml-auto">
+                            <li class="nav-item active">
+                                <a class="nav-link" href="#">Page</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Page</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Page</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Page</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
+            <div id="apContent">
+                @RenderBody()
+                <hr />
+            </div>
+        </div>
+    </div>
+
+    <!-- jQuery CDN - Slim version (=without AJAX) -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <!-- Popper.JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+    <!-- Bootstrap JS -->
+    @*<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>*@
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+
+    <script type="text/javascript">
+
+        //جمع و بسته کردن منو
+        $(document).ready(function () {
+            $('#sidebarCollapse').on('click', function () {
+                $('#sidebar').toggleClass('active');
+                $('.sidebar-titel').toggle();
+            });
+        });
+
+        //تغییر متن دکمه منو 
+        $(document).ready(function () {
+            $("#sidebarCollapse").click(function () {
+                $('#colapstext').text($('#colapstext').text() == 'منو بسته' ? 'منو باز' : 'منو بسته');
+            });
+        });
+
+        //تغییر منوی اکتیو 
+        $(document).ready(function () {
+            $('li.main-item').click(function () {
+                $(this).closest('li.main-item').addClass('active');
+                $('li.main-item').removeClass('active');
+                $('ul.collapse').removeClass('in');
+                $('a.dropdown-toggle').attr("aria-expanded", "false");
+            });
+        });
+
+    </script>
+</body>
+
+</html>

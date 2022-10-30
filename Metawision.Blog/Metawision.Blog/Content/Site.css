@@ -6,26 +6,26 @@
     background-color: #0c0c0c !important;
 }
 
-/* Set padding to keep content from hitting the edges */
+ Set padding to keep content from hitting the edges 
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
 }
 
-/* Override the default bootstrap behavior where horizontal description lists 
+ Override the default bootstrap behavior where horizontal description lists 
    will truncate terms that are too long to fit in the left column 
-*/
+
 .dl-horizontal dt {
     white-space: normal;
 }
 
-/* Set width on the form input elements since they're 100% wide by default */
+ Set width on the form input elements since they're 100% wide by default 
 input,
 select,
-/*textarea {
+textarea {
     max-width: 280px;
 }
-*/
+
 
 .pagination > li > a, .pagination > li > span {
     float: right !important;
@@ -60,8 +60,8 @@ select,
     background-size: cover;
     background-position: 50% 50%;
     background-repeat: no-repeat;
-/*    width: 100%;
-    height: 100%;*/
+    width: 100%;
+    height: 100%;
 }
 
 .cell-title {
@@ -72,7 +72,7 @@ select,
     text-align: right;
     z-index: 1;
     color: gold;
-    /* width: 100%; */
+     width: 100%; 
 }
 
 a {
@@ -169,5 +169,63 @@ body {
 
 .navbar-collapse {
     width: 100% !important;
+}
+
+#apWrap {
+    height: auto;
+    min-height: 100%;
+    width: 100%;
+    position: relative;
+    -webkit-font-smoothing: subpixel-antialiased;
+}
+
+#panelbody {
+    padding: 0px;
+    background-color: #efefef !important;
+    color: #0c0c0c !important;
+}
+
+#panelTitle {
+    text-align:center;
+    color:azure;
+    font-size: 24px;
+}
+
+#apContent {
+
+}
+
+#adminMenuBar {
+    float: right;
+    z-index: 9990;
+}
+
+#adminMenuBack {
+    position: fixed;
+    top: 0;
+    bottom: -120px;
+    z-index: 1;
+}
+
+#adminMenuBar, #adminMenu,
+#adminMenuBack {
+    width: 160px;
+    background-color: #1d2327;
+}
+
+#adminMenu {
+    clear: right;
+    margin: 12px 0;
+    padding: 0;
+    list-style: none;
+}
+
+#apContent, #apFooter {
+    margin-right: 160px;
+}
+
+#apContent {
+    height: 100%;
+    padding: 10px 20px 0px 0px;
 }
 

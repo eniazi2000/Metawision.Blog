@@ -8,7 +8,7 @@ using System.Web.Mvc;
 
 namespace Metawision.Blog.Controllers
 {
-    public class AdminController : Controller
+    public partial class AdminController : Controller
     {
         [HttpGet]
         public ActionResult Admin()
