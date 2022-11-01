@@ -25,6 +25,10 @@ namespace Metawision.Blog
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
+
+            bundles.Add(new StyleBundle("~/Content/admincss").Include(
+                    "~/Content/bootstrap.css",
+                    "~/Content/admincss.css"));
         }
     }
 }

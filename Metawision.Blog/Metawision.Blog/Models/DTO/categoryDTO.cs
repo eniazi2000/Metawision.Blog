@@ -10,8 +10,8 @@ namespace Metawision.Blog.Models.DTO
     public class categoryDTO
     {
         public int id { get; set; }
-        [Required(ErrorMessage ="دسته بندی والد انتخاب نشده است")]
-        [DisplayName("دسته بندی والد")]
+        [Required(ErrorMessage ="دسته بندی انتخاب نشده است")]
+        [DisplayName("دسته بندی ")]
         public int idParent { get; set; }
         [Required(ErrorMessage ="عنوان وارد نشده است")]
         [DisplayName("عنوان")]
