@@ -206,10 +206,22 @@
         //تغییر منوی اکتیو 
         $(document).ready(function () {
             $('li.main-item').click(function () {
-                $(this).closest('li.main-item').addClass('active');
-                $('li.main-item').removeClass('active');
-                $('ul.collapse').removeClass('in');
-                $('a.dropdown-toggle').attr("aria-expanded", "false");
+
+                if ($(this).hasClass('active') == true) {
+                    console.log('active');
+                    console.log(this);
+                    $(this).children('ul.in').attr("aria-expanded", "false");
+                    //$(this).children('a.dropdown-toggle').attr("aria-expanded", "true");
+                    //$(this).first('a').attr("aria-expanded", "true");
+                } else if ($(this).hasClass('active') == false) {
+                    console.log('not active');
+                    console.log(this);
+                    $('li.main-item').removeClass('active');
+                    $('ul.in').removeClass('in');
+                    $('a.dropdown-toggle').attr("aria-expanded", "false");
+                    $(this).addClass('active');
+                }
+
             });
         });
 
