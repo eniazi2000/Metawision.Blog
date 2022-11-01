@@ -137,12 +137,15 @@
     <Compile Include="Models\Bl\categoryManager.cs" />
     <Compile Include="Models\Bl\commentsManager.cs" />
     <Compile Include="Models\Bl\contactUsManager.cs" />
+    <Compile Include="Models\Bl\imageManager.cs" />
     <Compile Include="Models\Bl\usersManager.cs" />
     <Compile Include="Models\DTO\articleDTO.cs" />
     <Compile Include="Models\DTO\categoryDTO.cs" />
     <Compile Include="Models\DTO\contactUsDTO.cs" />
+    <Compile Include="Models\DTO\imageDTO.cs" />
     <Compile Include="Models\DTO\tagDTO.cs" />
     <Compile Include="Models\extensions.cs" />
+    <Compile Include="Models\mahsaAdminController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -155,6 +158,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="image\1.png" />
     <Content Include="Metawision.ico" />
     <Content Include="Models\DTO\HtmlPage1.html" />
     <Content Include="DataClasses1.dbml">
@@ -241,9 +245,13 @@
     <Content Include="Views\Admin\contactUsList.cshtml" />
     <Content Include="Views\Admin\EditArticle.cshtml" />
     <Content Include="Views\Admin\EdtArticlePartial.cshtml" />
+    <Content Include="Views\Admin\UploadFile.cshtml" />
+    <Content Include="Views\Admin\UploadImageDTO.cshtml" />
+    <Content Include="Views\Admin\imageList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="UploadedFiles\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

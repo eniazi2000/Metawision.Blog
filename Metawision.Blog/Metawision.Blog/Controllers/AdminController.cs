@@ -1,13 +1,15 @@
 ﻿using Metawision.Blog.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
 namespace Metawision.Blog.Controllers
 {
-    public class AdminController : Controller
+
+    public partial class AdminController : Controller
     {
         [HttpGet]
         public ActionResult Admin()
@@ -59,5 +61,8 @@ namespace Metawision.Blog.Controllers
             return View();
         }
 
-    }
+
+
+
+        }
 }

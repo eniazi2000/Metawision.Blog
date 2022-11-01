@@ -1,0 +1,19 @@
+﻿@using Metawision.Blog.Models.Bl;
+@{
+    ViewBag.Title = "imageList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>imageList</h2>
+@{
+
+    var list = imageManager.GetImages();
+    foreach( var item in list)
+    {
+     <img src="data:image/png;base64, @item.pic"/>
+     <br/>
+
+    }
+
+}
+

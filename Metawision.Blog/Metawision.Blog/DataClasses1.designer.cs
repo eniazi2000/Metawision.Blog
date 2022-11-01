@@ -51,6 +51,9 @@ namespace Metawision.Blog
     partial void Insertcontact(contact instance);
     partial void Updatecontact(contact instance);
     partial void Deletecontact(contact instance);
+    partial void Insertimage(image instance);
+    partial void Updateimage(image instance);
+    partial void Deleteimage(image instance);
     #endregion
 		
 		public DataClasses1DataContext() : 
@@ -136,6 +139,14 @@ namespace Metawision.Blog
 			get
 			{
 				return this.GetTable<contact>();
+			}
+		}
+		
+		public System.Data.Linq.Table<image> images
+		{
+			get
+			{
+				return this.GetTable<image>();
 			}
 		}
 	}
@@ -1293,6 +1304,92 @@ namespace Metawision.Blog
 					this._date = value;
 					this.SendPropertyChanged("date");
 					this.OndateChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.image")]
+	public partial class image : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private string _pic;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnpicChanging(string value);
+    partial void OnpicChanged();
+    #endregion
+		
+		public image()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_pic", DbType="Text NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
+		public string pic
+		{
+			get
+			{
+				return this._pic;
+			}
+			set
+			{
+				if ((this._pic != value))
+				{
+					this.OnpicChanging(value);
+					this.SendPropertyChanging();
+					this._pic = value;
+					this.SendPropertyChanged("pic");
+					this.OnpicChanged();
 				}
 			}
 		}
