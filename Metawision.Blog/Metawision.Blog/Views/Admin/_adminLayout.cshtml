@@ -7,6 +7,7 @@
     <title>@ViewBag.Title - Metawision</title>
     @Styles.Render("~/Content/admincss")
     @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
     <link href="~/lib/font-awesome/css/all.css" rel="stylesheet" />
     <link rel="icon" href="~/Metawision.ico" />
 
@@ -30,7 +31,7 @@
             </div>
 
             <ul class="list-unstyled components">
-                <li class="main-item active">
+                <li class="main-item @(ViewContext.RouteData.Values["Action"].ToString() == "adminPanel" ? "active" : "")">
                     <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                         <i class="fas fa-bookmark"></i>
                         <span class="sidebar-titel">پیشخوان</span>
@@ -53,9 +54,7 @@
                         <li>
                             <a href="#">همه نوشته‌ها</a>
                         </li>
-                        <li>
-                            <a href="#">افزودن نوشته‌</a>
-                        </li>
+                        <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "newPost" ? "active" : "")">@Html.ActionLink("افزودن نوشته", "newPost", "Admin")</li>
                         <li>
                             <a href="#">دسته‌ها</a>
                         </li>
@@ -182,7 +181,7 @@
     <!-- Bootstrap JS -->
     @*<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>*@
 
-    @Scripts.Render("~/bundles/jquery")
+    
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 
@@ -203,6 +202,11 @@
             });
         });
 
+        //اکتیو کردن منوهای اصلی با زیرشاخه‌ها
+        $(document).ready(function () {
+            $("li.main-item").find("li.active").closest("li.main-item").addClass('active').children('ul').addClass("in");
+        })
+
         //تغییر منوی اکتیو 
         $(document).ready(function () {
             $('li.main-item').click(function () {
@@ -211,8 +215,6 @@
                     console.log('active');
                     console.log(this);
                     $(this).children('ul.in').attr("aria-expanded", "false");
-                    //$(this).children('a.dropdown-toggle').attr("aria-expanded", "true");
-                    //$(this).first('a').attr("aria-expanded", "true");
                 } else if ($(this).hasClass('active') == false) {
                     console.log('not active');
                     console.log(this);

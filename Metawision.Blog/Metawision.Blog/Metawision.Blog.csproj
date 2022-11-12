@@ -146,6 +146,7 @@
     <Compile Include="Models\DTO\tagDTO.cs" />
     <Compile Include="Models\extensions.cs" />
     <Compile Include="Models\mahsaAdminController.cs" />
+    <Compile Include="Models\mohsenAdminController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -248,6 +249,10 @@
     <Content Include="Views\Admin\UploadFile.cshtml" />
     <Content Include="Views\Admin\UploadImageDTO.cshtml" />
     <Content Include="Views\Admin\imageList.cshtml" />
+    <Content Include="Views\Admin\adminPanel.cshtml" />
+    <Content Include="Views\Admin\Categories.cshtml" />
+    <Content Include="Views\Admin\CategoriesList.cshtml" />
+    <Content Include="Views\Admin\_adminLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
