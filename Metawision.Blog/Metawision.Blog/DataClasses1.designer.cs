@@ -54,6 +54,12 @@ namespace Metawision.Blog
     partial void Insertimage(image instance);
     partial void Updateimage(image instance);
     partial void Deleteimage(image instance);
+    partial void InserthitCounter(hitCounter instance);
+    partial void UpdatehitCounter(hitCounter instance);
+    partial void DeletehitCounter(hitCounter instance);
+    partial void InsertarticleLike(articleLike instance);
+    partial void UpdatearticleLike(articleLike instance);
+    partial void DeletearticleLike(articleLike instance);
     #endregion
 		
 		public DataClasses1DataContext() : 
@@ -147,6 +153,22 @@ namespace Metawision.Blog
 			get
 			{
 				return this.GetTable<image>();
+			}
+		}
+		
+		public System.Data.Linq.Table<hitCounter> hitCounters
+		{
+			get
+			{
+				return this.GetTable<hitCounter>();
+			}
+		}
+		
+		public System.Data.Linq.Table<articleLike> articleLikes
+		{
+			get
+			{
+				return this.GetTable<articleLike>();
 			}
 		}
 	}
@@ -1390,6 +1412,274 @@ namespace Metawision.Blog
 					this._pic = value;
 					this.SendPropertyChanged("pic");
 					this.OnpicChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.hitCounter")]
+	public partial class hitCounter : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private string _ipAddress;
+		
+		private System.DateTime _date;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnipAddressChanging(string value);
+    partial void OnipAddressChanged();
+    partial void OndateChanging(System.DateTime value);
+    partial void OndateChanged();
+    #endregion
+		
+		public hitCounter()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ipAddress", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string ipAddress
+		{
+			get
+			{
+				return this._ipAddress;
+			}
+			set
+			{
+				if ((this._ipAddress != value))
+				{
+					this.OnipAddressChanging(value);
+					this.SendPropertyChanging();
+					this._ipAddress = value;
+					this.SendPropertyChanged("ipAddress");
+					this.OnipAddressChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_date", DbType="DateTime NOT NULL")]
+		public System.DateTime date
+		{
+			get
+			{
+				return this._date;
+			}
+			set
+			{
+				if ((this._date != value))
+				{
+					this.OndateChanging(value);
+					this.SendPropertyChanging();
+					this._date = value;
+					this.SendPropertyChanged("date");
+					this.OndateChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.articleLike")]
+	public partial class articleLike : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private int _idArticle;
+		
+		private System.DateTime _date;
+		
+		private string _ipAddress;
+		
+		private int _likeCount;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnidArticleChanging(int value);
+    partial void OnidArticleChanged();
+    partial void OndateChanging(System.DateTime value);
+    partial void OndateChanged();
+    partial void OnipAddressChanging(string value);
+    partial void OnipAddressChanged();
+    partial void OnlikeCountChanging(int value);
+    partial void OnlikeCountChanged();
+    #endregion
+		
+		public articleLike()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idArticle", DbType="Int NOT NULL")]
+		public int idArticle
+		{
+			get
+			{
+				return this._idArticle;
+			}
+			set
+			{
+				if ((this._idArticle != value))
+				{
+					this.OnidArticleChanging(value);
+					this.SendPropertyChanging();
+					this._idArticle = value;
+					this.SendPropertyChanged("idArticle");
+					this.OnidArticleChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_date", DbType="DateTime NOT NULL")]
+		public System.DateTime date
+		{
+			get
+			{
+				return this._date;
+			}
+			set
+			{
+				if ((this._date != value))
+				{
+					this.OndateChanging(value);
+					this.SendPropertyChanging();
+					this._date = value;
+					this.SendPropertyChanged("date");
+					this.OndateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ipAddress", DbType="VarChar(MAX) NOT NULL", CanBeNull=false)]
+		public string ipAddress
+		{
+			get
+			{
+				return this._ipAddress;
+			}
+			set
+			{
+				if ((this._ipAddress != value))
+				{
+					this.OnipAddressChanging(value);
+					this.SendPropertyChanging();
+					this._ipAddress = value;
+					this.SendPropertyChanged("ipAddress");
+					this.OnipAddressChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_likeCount", DbType="Int NOT NULL")]
+		public int likeCount
+		{
+			get
+			{
+				return this._likeCount;
+			}
+			set
+			{
+				if ((this._likeCount != value))
+				{
+					this.OnlikeCountChanging(value);
+					this.SendPropertyChanging();
+					this._likeCount = value;
+					this.SendPropertyChanged("likeCount");
+					this.OnlikeCountChanged();
 				}
 			}
 		}

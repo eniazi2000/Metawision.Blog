@@ -82,5 +82,18 @@ namespace Metawision.Blog.Controllers
             contactUsManager.saveContactUsToDatabase(cu);
             return View();
         }
+
+        [HttpPost]
+        public JsonResult LikeArticle(int id)
+        {
+            var res = articleManager.LikeArticle(id);
+
+            return Json(new { state = res });
+        }
+
+
+
+
+
     }
 }
