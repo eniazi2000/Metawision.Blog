@@ -1,5 +1,4 @@
-﻿
-@using Metawision.Blog.Models;
+﻿@using Metawision.Blog.Models;
 @{
     ViewBag.Title = "article";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -8,36 +7,36 @@
 @{
     var item = articleManager.getArticle(Model);
 }
-<body style="background-color : #000000">
-    <div class="container">
-        <div class="row">
+    <body style="background-color : #000000">
+        <div class="container">
+            <div class="row">
 
 
-            <div class="col-md-3">
-                <img alt="" src="https://metawision.com/wp-content/uploads/2022/02/frame-500.500.gif" class="resizeimage " style=" border: 20px solid #333333 " />
-                <br />
-                <p> 222</p>
+                <div class="col-md-3">
+                    <img alt="" src="https://metawision.com/wp-content/uploads/2022/02/frame-500.500.gif" class="resizeimage " style=" border: 20px solid #333333 " />
+                    <br />
+                    <p> 222</p>
 
-                @{
-                    Html.RenderPartial("showLatestPosts", Model);
-
-
-                }
+                    @{
+                        Html.RenderPartial("showLatestPosts", Model);
 
 
-            </div>
+                    }
 
 
-            <div class="col-md-8 col-md-offset-1 ">
-
-                @if (item != null && item.state == 2) //'state منتشر شده باشه
-                {
-
-                    <h2 style="color:white">@item.title</h2>
-                    <img src="@item.pic" class="resizeimage">
+                </div>
 
 
-                    @*<div class="input-group">
+                <div class="col-md-8 col-md-offset-1 ">
+
+                    @if (item != null && item.state == 2) //'state منتشر شده باشه
+                    {
+
+                        <h2 style="color:white">@item.title</h2>
+                        <img src="@item.pic" class="resizeimage">
+
+
+                        @*<div class="input-group">
                             <span class="input-group-addon">
                                 <i class="fa-solid fa-calendar-days"></i>
                                 <sapan>@item.date.ToLongDateString() | </sapan>
@@ -50,117 +49,148 @@
                             </span>
                         </div>*@
 
-                    <dive style="display:flex; padding:15px; color:white">
-                        <div>
-                            <i class="fa-regular fa-calendar" style="color:#fbdb24"></i>  <sapan>@item.date.ToLongDateString() | </sapan>
+                <dive style="display:flex; padding:15px; color:white">
+                    <div>
+                        <i class="fa-regular fa-calendar" style="color:#fbdb24"></i>  <sapan>@item.date.ToLongDateString() | </sapan>
 
-                        </div>
-                        <div style="padding-right:10px">
-                            <i class="fa-regular fa-folder">  </i> <span> کتگوری | </span>
-                        </div>
-                        <div style="padding-right:10px">
-                            <i class="fa-regular fa-comment-dots">  </i>  <span>کامنت |</span>
+                    </div>
+                    <div style="padding-right:10px">
+                        <i class="fa-regular fa-folder">  </i> <span> کتگوری | </span>
+                    </div>
+                    <div style="padding-right:10px">
+                        <i class="fa-regular fa-comment-dots">  </i>  <span>کامنت |</span>
 
-                        </div>
-                        <div style="padding-right:10px">
-                            <i class="fa-regular fa-heart"> </i> <span>لایک |</span>
-                        </div>
-                        <div style="padding-right:10px">
-                            <i class="fa-regular fa-eye"> </i> @item.viewCount <span>نمایش</span>
-                        </div>
-                    </dive>
+                    </div>
+                    <div style="padding-right:10px">
+                        <i class="fa-regular fa-heart"> </i> <span>لایک |</span>
+                    </div>
+                    <div style="padding-right:10px">
+                        <i class="fa-regular fa-eye"> </i> @item.viewCount <span>نمایش</span>
+                    </div>
+
+                  @*<span id="likePost">  <i class="fa-regular fa-heart"> </i> <span>لایک |</span> <span id="likeCount">@articleManager.articleLikeCount(Model).Count()</span>*@
+
+
+                </dive>
 
 
 
 
-                    <p style="color:white">@item.body</p>
-                    <img src="@item.pic" class="resizeimage">
+                        <p style="color:white">@item.body</p>
+                        <img src="@item.pic" class="resizeimage">
 
+
+                        <hr />
+                        <sapan>@item.date.ToLongDateString() @item.date.ToLongTimeString()</sapan>
+                        <hr />
+                    }
+
+
+
+                    <div class="row">
+                        @*<div class="col-md-1"></div>*@
+
+
+                        @{
+
+
+
+                            var nextid = articleManager.nextarticle(Model);
+                            if (nextid > 0)
+                            {
+                                var nextArticle = articleManager.getArticle(nextid);
+                                <div class="col-md-6">
+
+
+                                    <div style="border: solid 1px white; height:80px; width:100%;">
+                                        <a href="~/home/article/@nextArticle.Id" style="color:#fbdb24"> نوشته بعدی </a><br />
+                                        <a href="~/home/article/@nextArticle.Id" style="color:#fbdb24"> @nextArticle.title </a>
+
+
+                                    </div>
+                                </div>
+
+                            }
+
+                            var previousid = articleManager.previousarticle(Model);
+                            if (previousid > 0)
+                            {
+                                var previousArticle = articleManager.getArticle(previousid);
+
+
+                                <div class="col-md-6">
+
+
+                                    <div style="border: solid 1px white; height:80px; width:100%;">
+
+                                        <a href="~/home/article/@previousArticle.Id" style="color:#fbdb24"> نوشته قبلی </a><br />
+                                        <a href="~/home/article/@previousArticle.Id" style="color:#fbdb24"> @previousArticle.title </a>
+
+                                    </div>
+                                </div>
+
+
+                            }
+
+                        }
+                        @*<div class="col-md-1"></div>*@
+
+
+                    </div>
 
                     <hr />
-                    <sapan>@item.date.ToLongDateString() @item.date.ToLongTimeString()</sapan>
-                    <hr />
-                }
-
-
-
-                <div class="row">
-                    @*<div class="col-md-1"></div>*@
 
 
                     @{
 
 
-
-                        var nextid = articleManager.nextarticle(Model);
-                        if (nextid > 0)
-                        {
-                            var nextArticle = articleManager.getArticle(nextid);
-                            <div class="col-md-6">
-
-
-                                <div style="border: solid 1px white; height:80px; width:100%;">
-                                    <a href="~/home/article/@nextArticle.Id" style="color:#fbdb24"> نوشته بعدی </a><br />
-                                    <a href="~/home/article/@nextArticle.Id" style="color:#fbdb24"> @nextArticle.title </a>
-
-
-                                </div>
-                            </div>
-
-                        }
-
-                        var previousid = articleManager.previousarticle(Model);
-                        if (previousid > 0)
-                        {
-                            var previousArticle = articleManager.getArticle(previousid);
-
-
-                            <div class="col-md-6">
-
-
-                                <div style="border: solid 1px white; height:80px; width:100%;">
-
-                                    <a href="~/home/article/@previousArticle.Id" style="color:#fbdb24"> نوشته قبلی </a><br />
-                                    <a href="~/home/article/@previousArticle.Id" style="color:#fbdb24"> @previousArticle.title </a>
-
-                                </div>
-                            </div>
-
-
-                        }
-
+                        Html.RenderPartial("getComments", Model);
+                        <hr />
+                        Html.RenderPartial("showArticleAllComments", Model);
                     }
-                    @*<div class="col-md-1"></div>*@
+
+
+
+
+
+
+                    <span>@item.viewCount</span>
+
+
 
 
                 </div>
-
-                <hr />
-
-
-                @{
-
-
-                    Html.RenderPartial("getComments", Model);
-                    <hr />
-                    Html.RenderPartial("showArticleAllComments", Model);
-                }
-
-
-
-
-
-
-                <span>@item.viewCount</span>
-
-
-
             </div>
         </div>
-    </div>
+
+        <script>
+            $("#LikeArticle").click(function () {
+
+                    $ajax({
+
+                    url: "../LikeArticle",
+                    type: "POST",
+                    data: {id : @Model}
+
+                }).done(function (msg) {
+                    if (msg.state >= 0) {
+                        $("likeCount").text(msg.state);
+                    }
+                });
 
 
 
 
-</body>
+        </script>
+        
+        var request=
+        $ajax(
+        )
+        
+        
+        }
+       
+
+
+    </body>
 

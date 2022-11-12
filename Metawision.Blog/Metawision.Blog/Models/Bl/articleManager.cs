@@ -7,13 +7,14 @@ namespace Metawision.Blog.Models
 {
     public class articleManager
     {
+
         public static object ViewBag { get; private set; }
 
         public static List<article> getAllArticle()
         {
             DataClasses1DataContext db = new DataClasses1DataContext();
             return db.articles.OrderByDescending(a => a.date).ToList();
-                
+
         }
 
         public static List<article> latestThreePosts()
@@ -96,7 +97,7 @@ namespace Metawision.Blog.Models
             var item = db.tags.Where(t => t.id == idTag).FirstOrDefault();
             try
             {
-                if(item!= null)
+                if (item != null)
                 {
                     db.tags.DeleteOnSubmit(item);
                     db.SubmitChanges();
@@ -119,7 +120,7 @@ namespace Metawision.Blog.Models
             try
             {
                 var item = database.articles.Where(ar => ar.Id == index).FirstOrDefault();
-                if(item !=null)
+                if (item != null)
                 {
                     database.articles.DeleteOnSubmit(item);
                     database.SubmitChanges();
@@ -179,5 +180,79 @@ namespace Metawision.Blog.Models
 
 
 
+        public static int LikeArticle(int articleId) //آیدی ارتیکل می‌گیره
+        {
+            DataClasses1DataContext db = new DataClasses1DataContext();
+            try
+            {
+                var ipAdd = ipAddressManager.GetIp();
+
+                if (ipAdd.Length > 0)
+                {
+                    var likeItem = db.articleLikes.Where(m => m.idArticle == articleId && m.ipAddress == ipAdd).FirstOrDefault();
+                    if (likeItem == null)
+                    {
+
+
+                        articleLike like = new articleLike
+                        {
+
+                            ipAddress = ipAdd,
+                            date = DateTime.Now,
+                            idArticle = articleId,
+
+                        };
+                        db.articleLikes.InsertOnSubmit(like);
+                        db.SubmitChanges();
+
+                    }
+                    else
+                    {
+                        db.articleLikes.DeleteOnSubmit(likeItem);
+                        db.SubmitChanges();
+
+                    }
+
+                    return db.articleLikes.Where(m => m.idArticle == articleId).Count();
+
+                }
+                else
+                {
+                    return -2;
+                }
+            }
+
+            catch
+            {
+                return -2;
+            }
+
+         }
+
+
+
+        public static void articleLikeCount(int id)
+        {
+            DataClasses1DataContext db = new DataClasses1DataContext();
+            var c = db.articleLikes.Where(b => b.Id == id).FirstOrDefault();
+            c.likeCount = c.likeCount + 1;
+            db.SubmitChanges();
+
+        }
+
+
+      
+
     }
-}
+
+ }
+        
+
+
+
+
+
+
+
+
+

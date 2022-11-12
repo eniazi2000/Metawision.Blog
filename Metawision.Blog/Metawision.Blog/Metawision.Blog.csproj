@@ -138,6 +138,8 @@
     <Compile Include="Models\Bl\commentsManager.cs" />
     <Compile Include="Models\Bl\contactUsManager.cs" />
     <Compile Include="Models\Bl\imageManager.cs" />
+    <Compile Include="Models\Bl\ipAddressManager.cs" />
+    <Compile Include="Models\Bl\sessionManager.cs" />
     <Compile Include="Models\Bl\usersManager.cs" />
     <Compile Include="Models\DTO\articleDTO.cs" />
     <Compile Include="Models\DTO\categoryDTO.cs" />
