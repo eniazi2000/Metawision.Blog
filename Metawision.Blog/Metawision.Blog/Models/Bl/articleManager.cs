@@ -24,6 +24,13 @@ namespace Metawision.Blog.Models
 
         }
 
+        public static article lastPost()
+        {
+            DataClasses1DataContext db = new DataClasses1DataContext();
+            var article = db.articles.OrderByDescending(m => m.Id).FirstOrDefault();
+            return article;
+        }
+
         public static void addViewCountForAricle(int id)
         {
             DataClasses1DataContext database = new DataClasses1DataContext();
@@ -50,7 +57,7 @@ namespace Metawision.Blog.Models
                     date = DateTime.Now,
                     idUser = usersManager.getUserId(),
                     pic = model.pic,
-                    state = 0,
+                    state = model.state,
                     title = model.title
                 };
                 DataClasses1DataContext db = new DataClasses1DataContext();

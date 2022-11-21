@@ -30,7 +30,8 @@ namespace Metawision.Blog.Controllers
         public ActionResult newPost(articleDTO newArticle)
         {
             articleManager.saveArticleToDatabase(newArticle);
-            return View();
+            return RedirectToAction("editArticle" , "admin");
+            //return View();
         }
         [HttpGet]
         public ActionResult articleList()
@@ -44,25 +45,34 @@ namespace Metawision.Blog.Controllers
             return View("articleList");
         }
         [HttpGet]
-        public ActionResult EditArticle(int id)
+        [ValidateInput(false)]
+        public ActionResult EditArticle()
         {
-
-            return View(id);
+            return View();
         }
-
         [HttpPost]
+        [ValidateInput(false)]
         public ActionResult EditArticle(article model)
         {
-
-            return RedirectToAction("article" , "home" , new { id = model.Id });
+            //return RedirectToAction("article" , "home" , new { id = model.Id });
+            return View();
         }
         public ActionResult contactUsList()
         {
             return View();
         }
 
-
-
-
+        public ActionResult Categories()
+        {
+            return View();
         }
+        [HttpPost]
+        public ActionResult Categories(categoryDTO newCat)
+        {
+            categoryManager.saveCategoryToDatabase(newCat);
+            return View();
+        }
+
+    }
+
 }

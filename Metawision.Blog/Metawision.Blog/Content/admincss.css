@@ -26,6 +26,17 @@ a:focus {
     transition: all 0.3s;
 }
 
+.a-tag:hover,
+.a-tag:focus {
+    text-decoration: underline;
+    transition: all 0.3s;
+}
+
+.a-tag {
+    color: #337ab7 !important;
+    text-decoration: none;
+}
+
 .navbar {
     padding: 15px 10px;
     background: #fff;
@@ -306,3 +317,66 @@ a.article:hover {
         display: none;
     }
 }
+
+.direction-rtl {
+    float: right;
+    padding-left: 10px;
+}
+
+.inbox-label {
+    font-weight: 500 !important;
+    display: contents;
+    font-size: 14px;
+    line-height: 1.42857143;
+}
+
+
+.direction-ltr {
+    float: left;
+}
+
+.normal-ui-txt {
+    display: inline-flex;
+    font-size: 18px !important;
+}
+
+.section-title {
+    margin: 0 auto;
+    direction: rtl;
+    font-weight: 700;
+    font-size: 16px;
+}
+
+.panel-box {
+    color: #333333;
+    display: flow-root;
+    border-radius: 5px;
+    padding: 15px !important;
+    border: 1px solid rgba(0,0,0,.2) !important;
+    margin-bottom: 30px;
+    background-color: #f5f5f5;
+}
+
+
+hr {
+    margin-top: 10px !important;
+    margin-bottom: 15px !important;
+}
+
+.post-title {
+    height: unset !important;
+    font-size: 1.7em !important;
+}
+
+#link-box {
+    width: 200px;
+}
+
+#cLink-txt {
+    font-weight: 700;
+    font-size: 18px;
+}
+
+/*.note-editable {
+    height: 309px;
+}*/

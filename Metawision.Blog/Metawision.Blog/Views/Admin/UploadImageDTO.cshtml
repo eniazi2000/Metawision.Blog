@@ -2,15 +2,15 @@
 
 @{
     ViewBag.Title = "UploadImageDTO";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Admin/_adminLayout.cshtml";
 }
 
 @*<h2>UploadImageDTO</h2>*@
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         @*<h4>imageDTO</h4>*@
         <hr />
@@ -18,9 +18,9 @@
         <div class="form-group">
             @Html.LabelFor(model => model.pic, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.pic, new { htmlAttributes = new { @class = "form-control", id = "imageTxt" , style="visibility:hidden;" } })
+                @Html.EditorFor(model => model.pic, new { htmlAttributes = new { @class = "form-control", id = "imageTxt", style = "visibility:hidden;" } })
 
-                <input type="file" name="fileSelect" id="fileSelect" style="visibility:hidden;"/>
+                <input type="file" name="fileSelect" id="fileSelect" style="visibility:hidden;" />
 
                 <img src="~/image/1.png" id="thImage" style="width:200px;height:auto;" />
 
@@ -30,11 +30,11 @@
 
         <div class="form-group">
             <div class="col-md-offset-3 col-md-6">
-               
+
 
                 @*<input type="submit" value="بارگذازی تصویر" class="btn btn-default "  />*@
-                
-                <input type="button" onclick="uploadWithAjax()" value="بارگذاری تصویر آژاکس"  class="btn btn-primary" />
+
+                <input type="button" onclick="uploadWithAjax()" value="بارگذاری تصویر آژاکس" class="btn btn-primary" />
 
             </div>
         </div>
