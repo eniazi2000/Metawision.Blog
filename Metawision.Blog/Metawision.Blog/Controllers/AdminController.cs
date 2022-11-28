@@ -5,6 +5,9 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Metawision.Blog.Models.DTO;
+using Metawision.Blog.Models.Bl;
+
 
 namespace Metawision.Blog.Controllers
 {
@@ -27,11 +30,16 @@ namespace Metawision.Blog.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult newPost(articleDTO newArticle)
+        public ActionResult newPost(articleDTO model)
         {
-            articleManager.saveArticleToDatabase(newArticle);
-            return RedirectToAction("editArticle" , "admin");
-            //return View();
+            articleManager.saveArticleToDatabase(model);
+            article art = articleManager.lastPost();
+            imageManager.updateImageByArtId(0, art.Id);
+            var img = imageManager.getImageByArticleId(art.Id);
+            art.idImage = img.Id;
+            //articleManager.updateArticleOnDatabaseByID(art, art.Id);
+            articleManager.updateArticleOnDatabase(art.convertToArticle());
+            return RedirectToAction("EditArticle" , "admin" , new { id = art.Id });
         }
         [HttpGet]
         public ActionResult articleList()
@@ -50,11 +58,20 @@ namespace Metawision.Blog.Controllers
         {
             return View();
         }
+        //[HttpGet]
+        //[ValidateInput(false)]
+        //public ActionResult EditArticle(int id)
+        //{
+        //    var article = articleManager.getArticle(id);
+        //    ViewData["articleId"] = article.Id.ToString();
+        //    return View(id);
+        //}
         [HttpPost]
         [ValidateInput(false)]
-        public ActionResult EditArticle(article model)
+        public ActionResult EditArticle(articleDTO model)
         {
-            //return RedirectToAction("article" , "home" , new { id = model.Id });
+            articleManager.updateArticleOnDatabase(model);
+            ViewData["articleId"] = model.id.ToString();
             return View();
         }
         public ActionResult contactUsList()
@@ -67,12 +84,23 @@ namespace Metawision.Blog.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Categories(categoryDTO newCat)
+        public ActionResult Categories(categoryDTO model)
         {
-            categoryManager.saveCategoryToDatabase(newCat);
+            categoryManager.saveCategoryToDatabase(model);
             return View();
         }
-
+        [HttpPost]
+        public PartialViewResult parUploadImageDTO(imageDTO model)
+        {
+            if (model.idArticle == 0)
+            {
+                imageManager.saveImageToDatabase(model);
+            }
+            else if (model.idArticle != 0)
+            {
+                imageManager.updateImageOnDatabase(model);
+            }
+            return PartialView();
+        }
     }
-
 }

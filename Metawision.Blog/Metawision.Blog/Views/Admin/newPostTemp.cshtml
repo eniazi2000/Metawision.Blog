@@ -1,7 +1,4 @@
 ﻿@using Metawision.Blog.Models
-@using Metawision.Blog.Models.Bl
-@using Metawision.Blog.Models.DTO
-
 @model Metawision.Blog.Models.articleDTO
 
 @{
@@ -33,19 +30,21 @@
                         @* -------- وضعیت انتشار -------- *@
                         <div id="post-status-select" style="display: none;">
                             @Html.EditorFor(model => model.state, new
-                       {
-                           htmlAttributes = new
-                           {
-                               @class = "form-control",
-                               id = "state-code",
-                               value = "0"
-                               //style = "visibility:hidden; display: none;"
-                           }
-                       })
+                            {
+                                htmlAttributes = new
+                                {
+                                    @class = "form-control",
+                                    id = "state-code",
+                                    value = "0"@*, style = "visibility:hidden; display: none;"*@ }
+                            })
                             <select class="input-sm" id="state-text">
                                 <option value="0">پیش نویس</option>
                                 <option value="1">در انتظار بازبینی</option>
                             </select>
+
+                            @{
+                                <h4> model.state </h4>
+                            }
 
                             @Html.ValidationMessageFor(model => model.state, "", new { @class = "text-danger" })
                             <button id="post-status-change" type="button" class="btn btn-default">ثبت</button>
@@ -92,8 +91,7 @@
                                         <p class="inbox-label">تصویر شاخص مقاله خود را انتخاب کنید.</p>
                                         <div class="article-feed" style="padding:0;">
                                             @{
-                                                imageDTO img = new imageDTO { };
-                                                Html.RenderPartial("parUploadImageDTO", img);
+                                                Html.RenderPartial("parUploadImageDTO");
                                             }
                                         </div>
                                     </div>
@@ -183,98 +181,98 @@
 
 <script>
 
-    $("document").ready(function () {
+        $("document").ready(function () {
 
-        $('#myForm').each(function () {
-            if ($(this).data('validator'))
-                $(this).data('validator').settings.ignore = ".note-editor *";
-        });
+            $('#myForm').each(function () {
+                if ($(this).data('validator'))
+                    $(this).data('validator').settings.ignore = ".note-editor *";
+            });
 
-        // ابعاد و مشخصات سامرنوت (ادیتور) در صفحه
-        $('#articleBody').summernote({
-            height: 309,                 // set editor height
-            minHeight: null,             // set minimum height of editor
-            maxHeight: null,             // set maximum height of editor
-            focus: true                  // set focus to editable area after initializing summernote
-        });
-        //$("#myForm").trigger("reset");
+            // ابعاد و مشخصات سامرنوت (ادیتور) در صفحه
+            $('#articleBody').summernote({
+                height: 309,                 // set editor height
+                minHeight: null,             // set minimum height of editor
+                maxHeight: null,             // set maximum height of editor
+                focus: true                  // set focus to editable area after initializing summernote
+            });
+            //$("#myForm").trigger("reset");
 
-        $("#post-status").click(function () {
-            $("#post-status-select").attr('style', 'display:block');
-            $("#post-status").attr('style', 'display:none');
-        });
+            $("#post-status").click(function () {
+                $("#post-status-select").attr('style', 'display:block');
+                $("#post-status").attr('style', 'display:none');
+            });
 
-        $('#post-status-change').click(function () {
-            $("#state-code").val($("#state-text option:selected").val());
-            $("#publishing-condition").children("strong").text($("#state-text option:selected").text());
-            $("#post-status-select").attr('style', 'display:none');
-            $("#post-status").attr('style', 'display:inline-flex');
-        });
+            $('#post-status-change').click(function () {
+                $("#state-code").val($("#state-text option:selected").val());
+                $("#publishing-condition").children("strong").text($("#state-text option:selected").text());
+                $("#post-status-select").attr('style', 'display:none');
+                $("#post-status").attr('style', 'display:inline-flex');
+            });
 
-        $('#revert-state-change').click(function () {
-            $("#post-status-select").attr('style', 'display:none');
-            $("#post-status").attr('style', 'display:inline-flex');
-        });
+            $('#revert-state-change').click(function () {
+                $("#post-status-select").attr('style', 'display:none');
+                $("#post-status").attr('style', 'display:inline-flex');
+            });
 
-        if ($('#cLink').val > 0) {
-            $('#cLink-box').attr('style', 'display:block');
-        }
-
-        //پر کردن خودکار لینک خبر از عنوان اولیه
-        $("#title").on("focusout", function () {
-            var link = $('#cLink').val();
-            var str = $('#title').val();
-            if (link == "" && str != "") {
-                str = str.replace(/\s+/g, '-').toLowerCase();
-                url = 'https://localhost:44371/Home/article/' + str + '/'
-                console.log(str);
-                $('#cLink').val(str);
-                $('#cLink-clickable').attr('url', url);
-                $('#cLink-txt').text(str);
-                $('#cLink-completed').attr('style', 'display:block');
+            if ($('#cLink').val > 0) {
                 $('#cLink-box').attr('style', 'display:block');
             }
-        });
 
-        //ادیت لینک خبر
-        $('#cLink-edit').click(function () {
-            console.log('متن فیلد قبل از جایگزینی :' + $('#cLink').val());
-            $('#cLink-temp').text($('#cLink').val());
-            $('#cLink-completed').attr('style', 'display:none');
-            $('#cLink-editing').attr('style', 'display:block');
-        });
+            //پر کردن خودکار لینک خبر از عنوان اولیه
+            $("#title").on("focusout", function () {
+                var link = $('#cLink').val();
+                var str = $('#title').val();
+                if (link == "" && str != "") {
+                    str = str.replace(/\s+/g, '-').toLowerCase();
+                    url = 'https://localhost:44371/Home/article/' + str + '/'
+                    console.log(str);
+                    $('#cLink').val(str);
+                    $('#cLink-clickable').attr('url', url);
+                    $('#cLink-txt').text(str);
+                    $('#cLink-completed').attr('style', 'display:block');
+                    $('#cLink-box').attr('style', 'display:block');
+                }
+            });
 
-        //اعمال تغییرات ایجاد شده روی لینک
-        $('#cLink-change').click(function () {
-            var cLink = $('#cLink-temp').text();
-            cLink = cLink.replace(/\s+/g, '-').toLowerCase();
-            url = 'https://localhost:44371/Home/article/' + cLink + '/'
-            console.log(cLink);
-            $('#cLink').val(cLink);
-            $('#cLink-clickable').attr('url', url);
-            $('#cLink-txt').text(cLink);
-            $('#cLink-editing').attr('style', 'display:none');
-            $('#cLink-completed').attr('style', 'display:block');
-        });
+            //ادیت لینک خبر
+            $('#cLink-edit').click(function () {
+                console.log('متن فیلد قبل از جایگزینی :' + $('#cLink').val());
+                $('#cLink-temp').text($('#cLink').val());
+                $('#cLink-completed').attr('style', 'display:none');
+                $('#cLink-editing').attr('style', 'display:block');
+            });
 
-        //لغو تغییرات انجام شده روی لینک
-        $('#revert-cLink-change').click(function () {
-            var cLink = $('#cLink').val();
-            url = 'https://localhost:44371/Home/article/' + cLink + '/'
-            console.log(cLink);
-            $('#cLink-clickable').attr('url', url);
-            $('#cLink-txt').text(cLink);
-            $('#cLink-editing').attr('style', 'display:none');
-            $('#cLink-completed').attr('style', 'display:block');
-        });
+            //اعمال تغییرات ایجاد شده روی لینک
+            $('#cLink-change').click(function () {
+                var cLink = $('#cLink-temp').text();
+                cLink = cLink.replace(/\s+/g, '-').toLowerCase();
+                url = 'https://localhost:44371/Home/article/' + cLink + '/'
+                console.log(cLink);
+                $('#cLink').val(cLink);
+                $('#cLink-clickable').attr('url', url);
+                $('#cLink-txt').text(cLink);
+                $('#cLink-editing').attr('style', 'display:none');
+                $('#cLink-completed').attr('style', 'display:block');
+            });
 
-        //نشر مقاله
-        $("#articleSubmit").click(function () {
-            var content = $('#articleBody').summernote('code');
-            $('#articleBody').attr('value', '');
-            $('#articleBody').val(content);
-            $("#aSubmit").click();
+            //لغو تغییرات انجام شده روی لینک
+            $('#revert-cLink-change').click(function () {
+                var cLink = $('#cLink').val();
+                url = 'https://localhost:44371/Home/article/' + cLink + '/'
+                console.log(cLink);
+                $('#cLink-clickable').attr('url', url);
+                $('#cLink-txt').text(cLink);
+                $('#cLink-editing').attr('style', 'display:none');
+                $('#cLink-completed').attr('style', 'display:block');
+            });
+
+            //نشر مقاله
+            $("#articleSubmit").click(function () {
+                var content = $('#articleBody').summernote('code');
+                $('#articleBody').attr('value', '');
+                $('#articleBody').val(content);
+                $("#aSubmit").click();
+            });
         });
-    });
 
 </script>

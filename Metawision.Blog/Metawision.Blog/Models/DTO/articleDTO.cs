@@ -27,7 +27,7 @@ namespace Metawision.Blog.Models
         public string idUser { get; set; }
         [DisplayName("لینک جایگزین")]
         public string customLink {get;set;}
-
-
+        public int viewCount { get; set; }
+        public int idImage { get; set; }
     }
 }
