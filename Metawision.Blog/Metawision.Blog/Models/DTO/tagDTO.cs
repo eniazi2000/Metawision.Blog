@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace Metawision.Blog.Models
+namespace Metawision.Blog.Models.DTO
 {
     public class tagDTO
     {

@@ -22,29 +22,9 @@ namespace Metawision.Blog.Controllers
         {
             return View();
         }
-
-        [HttpGet]
-        public ActionResult newPostCopy()
-        {
-            return View();
-        }
-        [HttpPost]
-        public ActionResult newPostCopy(articleDTO newArticle)
-        {
-            articleManager.saveArticleToDatabase(newArticle);
-            return View();
-        }
         [HttpGet]
         public ActionResult parUploadImageDTO()
         {
-            return View();
-        }
-
-
-        [HttpPost]
-        public ActionResult parUploadImageDTO(imageDTO model)
-        {
-            var temp = imageManager.saveImageToDatabase(model);  //check kon
             return View();
         }
     }
