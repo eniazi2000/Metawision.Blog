@@ -13,6 +13,7 @@ namespace Metawision.Blog.Models.bl
             m.date = DateTime.Now;
             database.comments.InsertOnSubmit(m);
             database.SubmitChanges();
+
         }
       
         public static List<comment> getArticleAllComments(int articleId)
@@ -37,6 +38,17 @@ namespace Metawision.Blog.Models.bl
             DataClasses1DataContext database = new DataClasses1DataContext();
             return database.comments.Where(c => c.id == Id).FirstOrDefault();
         }
+
+
+        public static void addcommentCount(int articleId)
+        {
+            DataClasses1DataContext database = new DataClasses1DataContext();
+            var m = database.comments.Where(cc => cc.idArticle == articleId).FirstOrDefault();
+            m.commentCount = m.commentCount + 1;
+            database.SubmitChanges();
+        }
+        
+
 
     }
 }

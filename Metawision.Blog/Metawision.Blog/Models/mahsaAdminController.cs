@@ -1,4 +1,5 @@
-﻿using Metawision.Blog.Models.Bl;
+﻿using Metawision.Blog.Models;
+using Metawision.Blog.Models.Bl;
 using Metawision.Blog.Models.DTO;
 using System;
 using System.Collections.Generic;
@@ -62,7 +63,7 @@ namespace Metawision.Blog.Controllers
 
 
         [HttpGet]
-        
+
         public ActionResult UploadImageDTO()
         {
             return View();
@@ -73,7 +74,7 @@ namespace Metawision.Blog.Controllers
 
         public ActionResult UploadImageDTO(imageDTO model)
         {
-            var temp  = imageManager.saveImageToDatabase(model);  //check kon
+            var temp = imageManager.saveImageToDatabase(model);  //check kon
             return View();
         }
 
@@ -85,6 +86,21 @@ namespace Metawision.Blog.Controllers
             return View();
         }
 
+        //[HttpPost]
+        //public JsonResult markContactUsRead(contact model)
+        //{
+        //    //contactUsManager.saveStateToDatabase(model);
+        //    return Json(new { state = true });
+        //}
+
+      
+
+        [HttpGet]
+        public ActionResult UpdateStateToDatabase(int id)
+        {
+            contactUsManager.UpdateStateToDatabase(id);
+            return View("contactUsList");
+        }
 
 
 

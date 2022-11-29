@@ -1,82 +1,182 @@
 ﻿@model Metawision.Blog.Models.contactUsDTO
-
-@{
-    ViewBag.Title = "contactUs";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
-
-<h2>contactUs</h2>
+@using CaptchaMvc.HtmlHelpers
 
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/jqueryval")
 
-    <div class="form-horizontal">
-        <h4>contactUsDTO</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.name, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
-            </div>
+
+
+    <div class="row">
+        <div class="col-md-5">
+            <h2 style="text-align:center;">همکاری با <span style="color:#fbdb24">متاویژن</span></h2>
+            <i class="fa-solid fa-check"><span class="check">همکاری در برگزاری فروش اولیه کالکشن‌های دیجیتال</span></i><br/>
+            <i class="fa-solid fa-check"><span class="check">پروپوزال سرمایه گذاری</span></i><br/>
+            <i class="fa-solid fa-check"><span class="check">مشارکت در مارکتینگ و بازاریابی</span></i>
+
+
+
+
+
         </div>
+        <div class="col-md-7  ">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.family, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.family, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.family, "", new { @class = "text-danger" })
-            </div>
-        </div>
+            <div class="form-horizontal">
+                <h3 style="text-align:center;">پیام خود را <span style="color:#fbdb24">ارسال کنید</span></h3>
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.email, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.email, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                <div class="form-group">
+                    @*@Html.LabelFor(model => model.name, htmlAttributes: new { @class = "control-label col-md-0" })*@
+                    <div class="col-md-12">
+                        @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control", @placeholder = "...نام" } })
+                        @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
+                    </div>
+                </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.phone, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.phone, new { htmlAttributes = new { @class = "form-control" } })
+
+
+
+                <div class="form-group">
+                    @*@Html.LabelFor(model => model.email, htmlAttributes: new { @class = "control-label col-md-0" })*@
+                    <div class="col-md-12">
+                        @Html.EditorFor(model => model.email, new { htmlAttributes = new { @class = "form-control", @placeholder = "ایمیل" } })
+                        @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                @*<div class="form-group">
+            @Html.LabelFor(model => model.phone, htmlAttributes: new { @class = "control-label col-md-0" })
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.phone, new { htmlAttributes = new { @class = "form-control", @placeholder = "شماره تماس" } })
                 @Html.ValidationMessageFor(model => model.phone, "", new { @class = "text-danger" })
             </div>
-        </div>
+        </div>*@
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.txt, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.txt, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.txt, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @*@Html.LabelFor(model => model.family, htmlAttributes: new { @class = "control-label col-md-0" })*@
+                    <div class="col-md-12">
+                        @Html.EditorFor(model => model.family, new { htmlAttributes = new { @class = "form-control", @placeholder = "موضوع" } })
+                        @Html.ValidationMessageFor(model => model.family, "", new { @class = "text-danger" })
+
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @*@Html.LabelFor(model => model.txt, htmlAttributes: new { @class = "control-label col-md-0" })*@
+                    <div class="col-md-12">
+                        @Html.EditorFor(model => model.txt, new { htmlAttributes = new { @class = "form-control", @placeholder = "پیام...", @style = "height: 150px;" } })
+                        @Html.ValidationMessageFor(model => model.txt, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <h5 class="paragraph"> حاصل جمع را وارد کنید<sup style="color:red">*</sup></h5>
+
+
+                <div class="form-group">
+                    <div class="col-md-12">
+
+                        <div class="captcha">
+
+                            @Html.MathCaptcha(refreshText: "Try Another", inputText: "")
+                            <p class="text-danger">@ViewBag.ErrorMessage</p>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                @*<div class="g-recaptcha" data-sitekey="6LdewjkjAAAAAGDlMBnNEHCHk0d58XxGu0mIOTsf"></div>*@
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <button type="submit" class="bt">ارسال پیام</button>
+
+                    </div>
+                </div>
+
+                @*<span style="display:inline-block; font-size:20px 0;padding:20px; border: 1px solid #ff0000">@ViewBag.Message</span>*@
+
             </div>
+            }
+
+
+
+            @*<div>
+                @Html.ActionLink("Back to List", "Index")
+            </div>*@
+        </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.securityCode, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.securityCode, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.securityCode, "", new { @class = "text-danger" })
-            </div>
-        </div>
+<style>
+    i {
+        color: #fbdb24;
+        padding-top:30px;
+        
+    }
+    .check{
+        color:white;
+        font-size:15px;
+        padding-right:10px;
+        padding-top :30px !important;
+    }
+    .captcha {
+        width: 100%;
+        height: 100px;
+        padding-top: 0px;
+        position:relative;
+        margin-top:-10px;
+        
+    }
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <button type="submit" class="btn btn-lg btn-primary">ارسال پیام</button>
-                @*<input type="submit" value="ارسال پیام" class="btn btn-default" />*@
-            </div>
-        </div>
-    </div>
-}
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+        .captcha img {
+            width:20%;
+            height: 50px;
+/*            padding-left: 10px;
+*/            border-radius: 0px 5px 5px 0px;
+            border-width: 1px;
+        }
+        .captcha input {
+            float: left;
+            width: 80%;
+            height: 50px;
+            position: relative;
+            margin-top: -96px;
+            margin-right: 100px;
+            border-radius: 5px 0px 0px 5px;
+            border-width: 1px;
+            padding-right:50px !important;
+            
+        }
+
+
+
+
+    a {
+        padding-right: 13px;
+    }
+
+
+    button {
+        position: absolute !important;
+        margin-top:-30px;
+        background-color: #fbdb24;
+        border-radius: 5px;
+        border-width: 1px;
+        width: 540px;
+        height: 40px;
+        color: black;
+    }
+    .paragraph {
+        position: absolute;
+        margin-top: -6px;
+    }
+    
+
+</style>
+
+

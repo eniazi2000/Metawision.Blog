@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using Metawision.Blog.Models.DTO;
 
 namespace Metawision.Blog.Models
 {
@@ -19,9 +18,7 @@ namespace Metawision.Blog.Models
                 pic = val.pic,
                 state = val.state,
                 title = val.title,
-                Id = val.id,
-                viewCount = val.viewCount,
-                idImage = val.idImage
+                Id = val.id
             };
             return item;
         }
@@ -31,39 +28,54 @@ namespace Metawision.Blog.Models
             {
                 body = val.body,
                 customLink = val.customLink,
+
                 idUser = val.idUser,
                 pic = val.pic,
                 state = val.state,
                 title = val.title,
-                id = (int)val.Id,
-                viewCount = val.viewCount,
-                idImage = (int)val.idImage
+                id = val.Id
             };
             return item;
         }
-        public static image convertToImage(this imageDTO val)
-        {
-            image item = new image
-            {
-                Id = val.Id,
-                pic = val.pic,
-                idArticle = val.idArticle,
-                date = DateTime.Now,
-                alt = val.alt
-            };
-            return item;
-        }
-        public static imageDTO convertToImage(this image val)
-        {
-        imageDTO item = new imageDTO
-            {
-                Id = val.Id,
-                pic = val.pic,
-                idArticle = (int)val.idArticle,
 
-                alt = val.alt
+/*
+        public static contact convertToContact(this contactUsDTO val)
+        {
+            contact item = new contact
+            {
+                Id = val.id,
+                name = val.name,
+                family = val.family,
+                email = val.email,
+                phone = val.phone,
+                txt = val.txt,
+                securityCode = val.securityCode,
+                date = DateTime.Now,
+                state = val.state,
             };
             return item;
         }
+
+
+        public static contactUsDTO convertToContact(this contact val)
+        {
+            contactUsDTO item = new contactUsDTO
+            {
+                id = val.Id,
+                name = val.name,
+                family = val.family,
+                email = val.email,
+                phone = val.phone,
+                txt = val.txt,
+                securityCode = val.securityCode,
+                state = val.state,
+            };
+            return item;
+        }
+
+
+*/
+
+
     }
 }

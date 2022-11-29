@@ -1,8 +1,4 @@
-﻿@using Metawision.Blog.Models
-@using Metawision.Blog.Models.Bl
-@using Metawision.Blog.Models.DTO
-
-@model Metawision.Blog.Models.articleDTO
+﻿@model Metawision.Blog.Models.articleDTO
 
 @{
     ViewBag.Title = "newPost";
@@ -17,156 +13,63 @@
     @{
         @Html.AntiForgeryToken()
 
-        <div class="row">
-            @* -------- ستون سمت چپ -------- *@
-            <div id="sidebarAP" class="col-md-3 col-sd-12">
-                <div id="publish-article" class="panel-box">
-                    <h5 class="section-title">انتشار</h5>
-                    <hr />
-                    <div class="form-group">
-                        <label class="control-label direction-rtl inbox-label">وضعیت:</label>
-                        <div id="publishing-condition" class="normal-ui-txt"><strong>پیش نویس</strong></div>
-                        <a href="#post-status" id="post-status" role="button" style="display:inline-flex">
-                            <span class="a-tag">ویرایش</span>
-                        </a>
-
-                        @* -------- وضعیت انتشار -------- *@
-                        <div id="post-status-select" style="display: none;">
-                            @Html.EditorFor(model => model.state, new
-                       {
-                           htmlAttributes = new
-                           {
-                               @class = "form-control",
-                               id = "state-code",
-                               value = "0"
-                               //style = "visibility:hidden; display: none;"
-                           }
-                       })
-                            <select class="input-sm" id="state-text">
-                                <option value="0">پیش نویس</option>
-                                <option value="1">در انتظار بازبینی</option>
-                            </select>
-
-                            @Html.ValidationMessageFor(model => model.state, "", new { @class = "text-danger" })
-                            <button id="post-status-change" type="button" class="btn btn-default">ثبت</button>
-                            <a href="#revert-state-change" id="revert-state-change" role="button" style="display:inline-flex">
-                                <span class="a-tag">لغو</span>
-                            </a>
-                        </div>
-                    </div>
-                    <hr />
-                    <div>
-                        <input id="articleSubmit" type="button" value="انتشار" class="btn btn-primary direction-ltr" />
-                        <input id="aSubmit" type="submit" value="انتشار" class="btn btn-primary direction-ltr" style="visibility:hidden;display:none" />
-                    </div>
-                </div>
-
-                @* --------  تصویر شاخص  -------- *@
-                <div id="publish-article" class="panel-box">
-                    <h5 class="section-title">تصویر شاخص</h5>
-                    <hr />
-                    <div style="border: 1px solid rgba(0,0,0,.1); border-radius: 3px;">
-                        <img src="~/image/Default-Metawision.jpg" id="theIndexImage" class="img-responsive p-1" />
-                    </div>
-                    <hr />
-                    <div class="form-group">
-                        <div class="col-md-12" style="visibility:hidden; display: none;">
-                            @Html.EditorFor(model => model.pic, new { htmlAttributes = new { @class = "form-control", id = "imageTxtTwo", style = "visibility:hidden; display:none" } })
-                            @*@Html.EditorFor(model => model.pic, new { htmlAttributes = new { @class = "form-control" } })*@
-                        </div>
-                        @Html.ValidationMessageFor(model => model.pic, "", new { @class = "text-danger" })
-                        <!-- Trigger the modal with a button -->
-                        <button type="button" class="btn btn-primary direction-ltr" data-toggle="modal" data-target="#myModal">انتخاب تصویر شاخص</button>
-
-                        <!-- Modal -->
-                        <div class="modal fade" id="myModal" role="dialog">
-                            <div class="modal-dialog">
-
-                                <!-- Modal content-->
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal" style="margin-left: 10px;">&times;</button>
-                                        <h4 class="section-title">بارگذاری تصویر شاخص</h4>
-                                    </div>
-                                    <div class="modal-body">
-                                        <p class="inbox-label">تصویر شاخص مقاله خود را انتخاب کنید.</p>
-                                        <div class="article-feed" style="padding:0;">
-                                            @{
-                                                imageDTO img = new imageDTO { };
-                                                Html.RenderPartial("parUploadImageDTO", img);
-                                            }
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-default direction-ltr" data-dismiss="modal">بستن</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+        <div class="form-horizontal">
+            @*<h4>articleDTO</h4>*@
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.title, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.title, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.title, "", new { @class = "text-danger" })
                 </div>
             </div>
 
-            <!-- -------- ستون سمت راست -------- -->
-            <div id="bodyAP" class="form-horizontal col-md-9 col-sd-12">
-
-                <!--  -------- عنوان مقاله -------- -->
-                <hr />
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                <div class="form-group" style="margin-bottom: 0px;">
-                    <div class="col-md-12">
-                        @Html.EditorFor(model => model.title, new { htmlAttributes = new { @class = "form-control post-title", @placeholder = "افزودن عنوان" } })
-                        @Html.ValidationMessageFor(model => model.title, "", new { @class = "text-danger" })
-                    </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.body, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.body, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.body, "", new { @class = "text-danger" })
                 </div>
+            </div>
 
-                <!-- --------  پیوند یکتا -------- -->
-                <div id="cLink-box" class="form-group" style="display:none">
-                    <div class="col-md-12">
-                        <label class="control-label direction-rtl">پیوند یکتا:</label>
-                        <div id="cLink-completed" style="display:none">
-                            <a href="#cLink-clickable" id="cLink-clickable" class="a-tag" role="button" style="display:inline-flex">
-                                https://localhost:44371/Home/article/
-                                <span id="cLink-txt">
-
-                                </span>
-                                /
-                            </a>
-                            <button id="cLink-edit" type="button" class="btn btn-default">ویرایش</button>
-                        </div>
-
-                        <div id="cLink-editing" style="display:none">
-                            <span class="control-label direction-rtl">https://localhost:44371/Home/article/</span>
-                            <div id="link-box" class="direction-rtl">
-                                <div id="cLink-temp" contenteditable="true" class="form-control text-box single-line">
-
-                                </div>
-                                @Html.EditorFor(model => model.customLink, new { htmlAttributes = new { @class = "form-control", id = "cLink", @style = "visibility:hidden;display:none" } })
-                                @Html.ValidationMessageFor(model => model.customLink, "", new { @class = "text-danger" })
-                            </div>
-                            <span class="control-label direction-rtl">/</span>
-                            <button id="cLink-change" type="button" class="btn btn-default">ثبت</button>
-                            <a href="#revert-cLink-change" id="revert-cLink-change" role="button" style="display:inline-flex">
-                                <span class="a-tag">لغو</span>
-                            </a>
-                        </div>
-                    </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.state, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.state, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.state, "", new { @class = "text-danger" })
                 </div>
+            </div>
 
-                <!-- --------  متن مقاله  -------- -->
-                <div class="form-group">
-                    <div class="col-md-12">
-                        @Html.EditorFor(model => model.body, new { htmlAttributes = new { @class = "form-control", id = "articleBody", @style = "visibility: hidden;display:none" } })
-                        @Html.ValidationMessageFor(model => model.body, "", new { @class = "text-danger" })
-                    </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.pic, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.pic, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.pic, "", new { @class = "text-danger" })
+                <input id="pic" type="text" name="pic" style=" height:40px;  width:100%;" required placeholder=" " oninvalid="this.setCustomValidity('ایمیل را به درستی وارد کنید')" oninput="this.setCustomValidity('')" />
                 </div>
+            </div>
 
-                <div class="form-group">
-                    @Html.LabelFor(model => model.idUser, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.idUser, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.idUser, "", new { @class = "text-danger" })
-                    </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.idUser, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.idUser, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.idUser, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.customLink, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.customLink, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.customLink, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Create" class="btn btn-default" />
+                    <input type="reset" value="reset" class="btn btn-default" />
                 </div>
             </div>
         </div>
@@ -184,97 +87,7 @@
 <script>
 
     $("document").ready(function () {
-
-        $('#myForm').each(function () {
-            if ($(this).data('validator'))
-                $(this).data('validator').settings.ignore = ".note-editor *";
-        });
-
-        // ابعاد و مشخصات سامرنوت (ادیتور) در صفحه
-        $('#articleBody').summernote({
-            height: 309,                 // set editor height
-            minHeight: null,             // set minimum height of editor
-            maxHeight: null,             // set maximum height of editor
-            focus: true                  // set focus to editable area after initializing summernote
-        });
-        //$("#myForm").trigger("reset");
-
-        $("#post-status").click(function () {
-            $("#post-status-select").attr('style', 'display:block');
-            $("#post-status").attr('style', 'display:none');
-        });
-
-        $('#post-status-change').click(function () {
-            $("#state-code").val($("#state-text option:selected").val());
-            $("#publishing-condition").children("strong").text($("#state-text option:selected").text());
-            $("#post-status-select").attr('style', 'display:none');
-            $("#post-status").attr('style', 'display:inline-flex');
-        });
-
-        $('#revert-state-change').click(function () {
-            $("#post-status-select").attr('style', 'display:none');
-            $("#post-status").attr('style', 'display:inline-flex');
-        });
-
-        if ($('#cLink').val > 0) {
-            $('#cLink-box').attr('style', 'display:block');
-        }
-
-        //پر کردن خودکار لینک خبر از عنوان اولیه
-        $("#title").on("focusout", function () {
-            var link = $('#cLink').val();
-            var str = $('#title').val();
-            if (link == "" && str != "") {
-                str = str.replace(/\s+/g, '-').toLowerCase();
-                url = 'https://localhost:44371/Home/article/' + str + '/'
-                console.log(str);
-                $('#cLink').val(str);
-                $('#cLink-clickable').attr('url', url);
-                $('#cLink-txt').text(str);
-                $('#cLink-completed').attr('style', 'display:block');
-                $('#cLink-box').attr('style', 'display:block');
-            }
-        });
-
-        //ادیت لینک خبر
-        $('#cLink-edit').click(function () {
-            console.log('متن فیلد قبل از جایگزینی :' + $('#cLink').val());
-            $('#cLink-temp').text($('#cLink').val());
-            $('#cLink-completed').attr('style', 'display:none');
-            $('#cLink-editing').attr('style', 'display:block');
-        });
-
-        //اعمال تغییرات ایجاد شده روی لینک
-        $('#cLink-change').click(function () {
-            var cLink = $('#cLink-temp').text();
-            cLink = cLink.replace(/\s+/g, '-').toLowerCase();
-            url = 'https://localhost:44371/Home/article/' + cLink + '/'
-            console.log(cLink);
-            $('#cLink').val(cLink);
-            $('#cLink-clickable').attr('url', url);
-            $('#cLink-txt').text(cLink);
-            $('#cLink-editing').attr('style', 'display:none');
-            $('#cLink-completed').attr('style', 'display:block');
-        });
-
-        //لغو تغییرات انجام شده روی لینک
-        $('#revert-cLink-change').click(function () {
-            var cLink = $('#cLink').val();
-            url = 'https://localhost:44371/Home/article/' + cLink + '/'
-            console.log(cLink);
-            $('#cLink-clickable').attr('url', url);
-            $('#cLink-txt').text(cLink);
-            $('#cLink-editing').attr('style', 'display:none');
-            $('#cLink-completed').attr('style', 'display:block');
-        });
-
-        //نشر مقاله
-        $("#articleSubmit").click(function () {
-            var content = $('#articleBody').summernote('code');
-            $('#articleBody').attr('value', '');
-            $('#articleBody').val(content);
-            $("#aSubmit").click();
-        });
+        $("#myForm").trigger("reset");
     });
 
 </script>

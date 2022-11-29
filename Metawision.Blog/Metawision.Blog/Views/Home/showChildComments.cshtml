@@ -2,25 +2,56 @@
 @model int
 
 
+@*<div style=" background-color:#2f2f38;  border-radius:10px; padding:10px;">*@
+
+
+@{
+    var childList = commentsManager.getParentCommentChilds(Model);
+    foreach (var item in childList)
+    {
+
+        <div style="background-color:#23232b; border-radius:10px; padding:10px; margin-top:10px;">
+
+
+            <div class="wrap-iblock">
+                <img src="~/Metawision.ico" style="width:27px; height:27px;" />
+
+                <h4 style="text-align:right; padding-right:1px;">@item.name</h4>
+            </div>
+            <h6 style="color:#8d7c19;">@item.date</h6>
+            <p>@item.body</p>
+
+            @{ 
+
+                Html.RenderPartial("getReplyComments", item.id);
+
+            }
+
+            <br/>
+
+
+        </div>
+                    Html.RenderPartial("showChildComments", item.id);
 
 
 
-        @{
-            var childList = commentsManager.getParentCommentChilds(Model);
-            foreach (var item in childList)
-            {
-
-                <div style="border:dotted 3px #00ff21" ; padding:10px; margin-top:10px;">
-                    <p>@item.body</p>
-                    <hr/>
-                    @{
-                        Html.RenderPartial("getReplyComments", item.id);
-                        Html.RenderPartial("showChildComments", item.id);
-                     }
-             </div>
+                }
 
 
-                    }
+}
 
-                    }
+@*</div>*@
+
+
+
+
+<style>
+    .wrap-iblock > * {
+        display: inline-block;
+        box-sizing: border-box;
+        width: 33%;
+        /*        border: 1px solid magenta;
+            */
+    }
+</style>
 

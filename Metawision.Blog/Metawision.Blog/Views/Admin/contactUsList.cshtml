@@ -9,14 +9,16 @@
 <table class="table">
     <thead>
         <tr>
-            <th>#</th>
-            <th>id</th>
+            <th>ردیف</th>
+            @*<th>id</th>*@
             <th>نام</th>
             <th>نام خانوادگی</th>
             <th>ایمیل</th>
             <th>شماره تلفن</th>
             <th>پیام</th>
             <th>تاریخ</th>
+            <th>وضعیت</th>
+            <th>state</th>
         </tr>
     </thead>
 
@@ -28,15 +30,27 @@
             {
                 <tr>
                     <td>@i</td>
-                    <td>@item.Id</td>
+                    @*<td>@item.Id</td>*@
                     <td>@item.name</td>
                     <td>@item.family</td>
                     <td>@item.email</td>
                     <td>@item.phone</td>
                     <td>@item.txt</td>
                     <td>@item.date</td>
+                    <td id="demo" onclick="changeText(this)">
+
+                        <a>خوانده نشده</a>
 
 
+                    </td>
+
+                    <td id="mark" onclick="read(this)">
+                        <a  href="~/admin/UpdateStateToDatabase/@item.Id"> @item.state
+                       
+
+                        </a>
+
+                    </td>
                 </tr>
                 i++;
             }
@@ -44,5 +58,38 @@
         }
 
     </tbody>
+
 </table>
 
+
+
+<script>
+    function changeText(id) {
+        id.innerHTML = "خوانده شد";
+        id.style.color = "green";
+
+    }
+
+   
+
+    //function read(id) {
+    //    id.innerHTML = "خوانده شد";
+    //    id.style.color = "green";
+
+    //}
+
+ 
+
+</script>
+
+
+<style>
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    td,th {
+        text-align: center;
+    }
+</style>
