@@ -1,4 +1,9 @@
 ﻿@using Metawision.Blog.Models;
+@using Metawision.Blog.Models.bl;
+
+@* share buttom sharethis *@
+ @*<script type="text/javascript" src="https://platform-api.sharethis.com/js/sharethis.js#property=637cab1f6fa502001965edee&product=inline-share-buttons&source=platform" async="async"></script>*@
+
 @{
     ViewBag.Title = "article";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -7,163 +12,201 @@
 @{
     var item = articleManager.getArticle(Model);
 }
-    <body style="background-color : #000000">
-        <div class="container">
-            <div class="row">
+<body style="background-color : #000000">
+    <div class="container">
+        <div class="row">
 
-
-                <div class="col-md-3">
-                    <img alt="" src="https://metawision.com/wp-content/uploads/2022/02/frame-500.500.gif" class="resizeimage " style=" border: 20px solid #333333 " />
+            <div class="col-md-3">
+                <div style="margin-top:63px;">
+                    <img alt="" src="https://metawision.com/wp-content/uploads/2022/02/frame-500.500.gif" class="resizeimage " style=" border: 20px solid #333333; " />
                     <br />
-                    <p> 222</p>
+                </div>
+                
+                <div style="margin-top:100px;">
+
 
                     @{
                         Html.RenderPartial("showLatestPosts", Model);
 
 
                     }
-
-
                 </div>
 
 
-                <div class="col-md-8 col-md-offset-1 ">
 
-                    @if (item != null && item.state == 2) //'state منتشر شده باشه
-                    {
-
-                        <h2 style="color:white">@item.title</h2>
-                        <img src="@item.pic" class="resizeimage">
+            </div>
 
 
-                        @*<div class="input-group">
-                            <span class="input-group-addon">
-                                <i class="fa-solid fa-calendar-days"></i>
-                                <sapan>@item.date.ToLongDateString() | </sapan>
-                                <i class="fa-regular fa-folder-open"></i>
+            <div class="col-md-8 col-md-offset-1 ">
+
+                @if (item != null && item.state == 2) //'state منتشر شده باشه
+                {
+                    <h2 style="color:white">@item.title</h2>
+
+                    <img src="@item.pic" class="resizeimage">
 
 
 
 
+                    <dive style="display:flex; padding:15px; color:white">
+                        <div>
+                            <i class="fa-regular fa-calendar" style="color:#fbdb24"></i>  <sapan>@item.date.ToLongDateString() | </sapan>
 
-                            </span>
-                        </div>*@
+                        </div>
+                        <div style="padding-right:10px">
+                            <i class="fa-regular fa-folder"></i><span> کتگوری | </span>
+                        </div>
+                        <div style="padding-right:10px">
+                            <i class="fa-regular fa-comment-dots">  </i> @commentsManager.getArticleAllComments(Model).Count() <span>نظر |</span>
 
-                <dive style="display:flex; padding:15px; color:white">
-                    <div>
-                        <i class="fa-regular fa-calendar" style="color:#fbdb24"></i>  <sapan>@item.date.ToLongDateString() | </sapan>
+                        </div>
+                        <div style="padding-right:10px">
+                            <i class="fa-regular fa-heart"> </i> <span>لایک |</span>
+                        </div>
+                        <div style="padding-right:10px">
+                            <i class="fa-regular fa-eye"> </i> @item.viewCount <span>نمایش</span>
+                        </div>
 
-                    </div>
-                    <div style="padding-right:10px">
-                        <i class="fa-regular fa-folder">  </i> <span> کتگوری | </span>
-                    </div>
-                    <div style="padding-right:10px">
-                        <i class="fa-regular fa-comment-dots">  </i>  <span>کامنت |</span>
-
-                    </div>
-                    <div style="padding-right:10px">
-                        <i class="fa-regular fa-heart"> </i> <span>لایک |</span>
-                    </div>
-                    <div style="padding-right:10px">
-                        <i class="fa-regular fa-eye"> </i> @item.viewCount <span>نمایش</span>
-                    </div>
-
-                  @*<span id="likePost">  <i class="fa-regular fa-heart"> </i> <span>لایک |</span> <span id="likeCount">@articleManager.articleLikeCount(Model).Count()</span>*@
+                        @*<span id="likePost">  <i class="fa-regular fa-heart"> </i> <span>لایک |</span> <span id="likeCount">@articleManager.articleLikeCount(Model).Count()</span>*@
 
 
-                </dive>
+                    </dive>
 
 
 
 
-                        <p style="color:white">@item.body</p>
-                        <img src="@item.pic" class="resizeimage">
+                    <p style="color:white">@item.body</p>
+                    <img src="@item.pic" class="resizeimage">
+
+                    <br />
+                    //share in social media
+                    <div style="background-color: #333; border:0px; border-radius:5px; padding:20px; margin:50px 0px 50px 0px;">
+                        <div id="shares-buttons">
+                            <span>به اشتراک گذاشتن این نوشته در:</span>
+
+                            <a href="#" class="facebook" target="blank"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="twitter" target="blank"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="linkedin" target="blank"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" class="reddit" target="blank"><i class="fab fa-reddit"></i></a>
+                            <a href="#" class="telegram" target="blank"><i class="fas fa-paper-plane"></i></a>
+                            <a href="#" class="whatsapp" target="blank"><i class="fab fa-whatsapp"></i></a>
+                            <a href="#" class="pinterest" target="blank"><i class="fab fa-pinterest"></i></a>
 
 
-                        <hr />
-                        <sapan>@item.date.ToLongDateString() @item.date.ToLongTimeString()</sapan>
-                        <hr />
-                    }
-
-
-
-                    <div class="row">
-                        @*<div class="col-md-1"></div>*@
-
-
-                        @{
-
-
-
-                            var nextid = articleManager.nextarticle(Model);
-                            if (nextid > 0)
-                            {
-                                var nextArticle = articleManager.getArticle(nextid);
-                                <div class="col-md-6">
-
-
-                                    <div style="border: solid 1px white; height:80px; width:100%;">
-                                        <a href="~/home/article/@nextArticle.Id" style="color:#fbdb24"> نوشته بعدی </a><br />
-                                        <a href="~/home/article/@nextArticle.Id" style="color:#fbdb24"> @nextArticle.title </a>
-
-
-                                    </div>
-                                </div>
-
-                            }
-
-                            var previousid = articleManager.previousarticle(Model);
-                            if (previousid > 0)
-                            {
-                                var previousArticle = articleManager.getArticle(previousid);
-
-
-                                <div class="col-md-6">
-
-
-                                    <div style="border: solid 1px white; height:80px; width:100%;">
-
-                                        <a href="~/home/article/@previousArticle.Id" style="color:#fbdb24"> نوشته قبلی </a><br />
-                                        <a href="~/home/article/@previousArticle.Id" style="color:#fbdb24"> @previousArticle.title </a>
-
-                                    </div>
-                                </div>
-
-
-                            }
-
-                        }
-                        @*<div class="col-md-1"></div>*@
-
-
+                        </div>
                     </div>
 
-                    <hr />
+                }
 
+
+
+                <div class="row">
 
                     @{
 
+                        var nextid = articleManager.nextarticle(Model);
+                        if (nextid > 0)
+                        {
+                            var nextArticle = articleManager.getArticle(nextid);
+                            <div class="col-md-6">
 
-                        Html.RenderPartial("getComments", Model);
-                        <hr />
-                        Html.RenderPartial("showArticleAllComments", Model);
+
+                                <div style="border: solid 1px white; height:80px; width:100%;">
+                                    <a href="~/home/article/@nextArticle.Id" style="color:#fbdb24"> نوشته بعدی </a><br />
+                                    <a href="~/home/article/@nextArticle.Id" style="color:#fbdb24"> @nextArticle.title </a>
+
+
+                                </div>
+                            </div>
+
+                        }
+
+                        var previousid = articleManager.previousarticle(Model);
+                        if (previousid > 0)
+                        {
+                            var previousArticle = articleManager.getArticle(previousid);
+
+
+                            <div class="col-md-6">
+
+
+                                <div style="border: solid 1px white; height:80px; width:100%;">
+
+                                    <a href="~/home/article/@previousArticle.Id" style="color:#fbdb24"> نوشته قبلی </a><br />
+                                    <a href="~/home/article/@previousArticle.Id" style="color:#fbdb24"> @previousArticle.title </a>
+
+                                </div>
+                            </div>
+
+
+                        }
+
                     }
 
-
-
-
-
-
-                    <span>@item.viewCount</span>
-
-
-
-
                 </div>
+
+                <hr />
+
+
+
+                @{
+
+
+                    Html.RenderPartial("getComments", Model);
+                    articleManager.addViewCountForAricle(Model);
+                    <div>
+                        <h4 style="text-align:left;">@commentsManager.getArticleAllComments(Model).Count()<span style="padding-right:3px;">نظر</span></h4>
+                    </div>
+                    <hr />
+
+                    Html.RenderPartial("showArticleAllComments", Model);
+                }
+
+
+
+
+
+
             </div>
         </div>
+    </div>
 
-        <script>
+    <style>
+        #shares-buttons {
+            display: flex;
+            align-items: center;
+        }
+
+        a {
+            padding-right: 15px;
+        }
+    </style>
+
+
+
+    @*share in  social media*@
+    <script>
+        //// const link = encodeURI(window.location.href); //url فعلی رو سیو میکنه
+        const link = 'https://metawision.com/news/nft-news/%d8%a7%d9%88%d9%84%db%8c%d9%86-%d9%85%d8%ac%d9%85%d9%88%d8%b9%d9%87-nft-%da%a9%d8%b1%db%8c%d8%b3%d8%aa%db%8c%d8%a7%d9%86%d9%88-%d8%b1%d9%88%d9%86%d8%a7%d9%84%d8%af%d9%88/';
+        const msg = encodeURIComponent('متاویژن دروازه ورود به دنیای متاورس و توکن‌های غیرمثلی');
+        //const title = encodeURIComponent(document.querySelector(title).textContent);
+        var fb = document.querySelector(" .facebook ");
+        fb.href = `https://www.facebook.com/share.php?u=${link}`;
+        var tw = document.querySelector(".twitter")
+        tw.href = `http://twitter.com/share?&url=${link}text=${msg}&hashtags=metaverse,NFT`;
+        var lin = document.querySelector(".linkedin")
+        lin.href = `https://www.linkedin.com/sharing/share-offsite/?url=${link}`;
+        var red = document.querySelector(".reddit")
+        red.href = `http://www.reddit.com/submit?url=${link}`
+        var tel = document.querySelector(".telegram")
+        tel.href = `https://telegram.me/share/url?url=${link}`
+        var wp = document.querySelector(".whatsapp")
+        wp.href = `https://api.whatssapp.com/send?text=${link}`
+        var pin = document.querySelector(".pinterest")
+        pin.href = `http://pinterest.com/pin/create/button/?url=${link}`
+    </script>
+
+    <script>
             $("#LikeArticle").click(function () {
 
                     $ajax({
@@ -178,19 +221,9 @@
                     }
                 });
 
+    </script>
 
 
 
-        </script>
-        
-        var request=
-        $ajax(
-        )
-        
-        
-        }
-       
-
-
-    </body>
+</body>
 

@@ -4,6 +4,10 @@
 using Metawision.Blog.Models;
 using Metawision.Blog.Models.bl;
 using System.Web.Mvc;
+using CaptchaMvc.HtmlHelpers;
+using System.Net;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace Metawision.Blog.Controllers
 {
@@ -55,6 +59,8 @@ namespace Metawision.Blog.Controllers
             {
                 return View(id);
             }
+            
+
         }
 
         [HttpGet]
@@ -63,25 +69,85 @@ namespace Metawision.Blog.Controllers
             return View();
         }
 
+        //[HttpPost]
+        //public ActionResult saveComments(comment model)
+        //{
+
+        //    commentsManager.saveComments(model);
+
+        //    return RedirectToAction("article", new { id = model.idArticle });
+        //}
+
         [HttpPost]
-       public ActionResult saveComments(comment model)
+        public ActionResult saveComments(comment m)
         {
+           // captcha validation
+
+            if (!this.IsCaptchaValid(errorText: ""))
+            {
+                ViewBag.ErrorMessage = "کد امنیتی را به درستی وارد کنید";
+                //اینو درست باید بکنم
+                return RedirectToAction("article", new { id = m.idArticle });
+
+
+                //return View("article", m);
+            }
             
-            commentsManager.saveComments(model);
-            
-            return RedirectToAction("article", new { id = model.idArticle });
+
+            else
+            {
+
+                commentsManager.saveComments(m);
+
+                return RedirectToAction("article", new { id = m.idArticle });
+
+            }
+
         }
+
+
         [HttpGet]
         public ActionResult contactUs()
         {
             return View();
         }
+
+
+
+
         [HttpPost]
-        public ActionResult contactUs(contact cu)
+        public ActionResult contactUs(contactUsDTO n)
         {
-            contactUsManager.saveContactUsToDatabase(cu);
-            return View();
+            if (!this.IsCaptchaValid(errorText: ""))
+            {
+                ViewBag.ErrorMessage = "کد امنیتی را به درستی وارد کنید";
+                return View("contactUs", n);
+
+
+            }
+            else
+            {
+                contactUsManager.saveContactUsToDatabase(n);
+                return Content("درخواست شما ارسال گردید");
+
+            }
+            //var response = Request["g-recaptcha-response"];
+            //string secretkey = "6LdewjkjAAAAAG-yBJT5tEk_aoC47LVBfuFtQ17z";
+            //var Client = new WebClient();
+            //var result = Client.DownloadString(string.Format("https://www.google.com/recaptcha/api/siteverify?secret={0}&response={1}", secretkey, response));
+            //var obj = JObject.Parse(result);
+            //var status = (bool)obj.SelectToken("success");
+            //ViewBag.Mesaage = status ? "google recaptcha validation success" : "google recaptcha validation failed";
+
+            //return Content("درخواست شما ارسال گردید");
+
+
+
         }
+
+
+ 
+
 
         [HttpPost]
         public JsonResult LikeArticle(int id)
@@ -90,7 +156,6 @@ namespace Metawision.Blog.Controllers
 
             return Json(new { state = res });
         }
-
 
 
 

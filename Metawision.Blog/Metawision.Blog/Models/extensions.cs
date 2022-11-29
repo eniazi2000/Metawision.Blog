@@ -38,6 +38,44 @@ namespace Metawision.Blog.Models
             return item;
         }
 
+/*
+        public static contact convertToContact(this contactUsDTO val)
+        {
+            contact item = new contact
+            {
+                Id = val.id,
+                name = val.name,
+                family = val.family,
+                email = val.email,
+                phone = val.phone,
+                txt = val.txt,
+                securityCode = val.securityCode,
+                date = DateTime.Now,
+                state = val.state,
+            };
+            return item;
+        }
+
+
+        public static contactUsDTO convertToContact(this contact val)
+        {
+            contactUsDTO item = new contactUsDTO
+            {
+                id = val.Id,
+                name = val.name,
+                family = val.family,
+                email = val.email,
+                phone = val.phone,
+                txt = val.txt,
+                securityCode = val.securityCode,
+                state = val.state,
+            };
+            return item;
+        }
+
+
+*/
+
 
     }
 }

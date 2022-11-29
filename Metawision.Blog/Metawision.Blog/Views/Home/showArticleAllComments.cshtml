@@ -2,18 +2,36 @@
 @model int
 
 
-<div style="border:solid 2px #0099ff; padding:10px;">
-    @{ 
+<div style=" background-color:#222229;  border-radius:10px; padding:10px;">
+    @{
         var parentList = commentsManager.getArticleAllParentComments(Model);
         foreach (var item in parentList)
         {
-            <p>@item.body</p>
+            @*<h3>@item.name</h3>
+                <p>@item.body</p>*@
+            <div style="background-color:#2f2f38; border-radius:10px; padding:10px; ">
 
-            Html.RenderPartial("getReplyComments", item.id);
-           Html.RenderPartial("showChildComments", item.id);
-            <hr/>
-        }
+                <div class="wrap-iblock">
+                    <img src="~/Metawision.ico" style="width:27px; height:27px;" />
+
+                    <h4 style="text-align:right; padding-right:1px;">@item.name</h4>
+                </div>
+                <h6 style="color:#8d7c19;">@item.date</h6>
+                <p>@item.body</p>
+
+            @{
+                Html.RenderPartial("getReplyComments", item.id);
+                Html.RenderPartial("showChildComments", item.id);
+
+
+             }
+        </div>
+        <br/>
+
+        @*<hr />*@
+                }
 
     }
 
     </div>
+   

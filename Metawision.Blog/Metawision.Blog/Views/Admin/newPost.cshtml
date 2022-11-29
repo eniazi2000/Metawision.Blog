@@ -43,9 +43,10 @@
 
             <div class="form-group">
                 @Html.LabelFor(model => model.pic, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.pic, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.pic, "", new { @class = "text-danger" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.pic, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.pic, "", new { @class = "text-danger" })
+                <input id="pic" type="text" name="pic" style=" height:40px;  width:100%;" required placeholder=" " oninvalid="this.setCustomValidity('ایمیل را به درستی وارد کنید')" oninput="this.setCustomValidity('')" />
                 </div>
             </div>
 

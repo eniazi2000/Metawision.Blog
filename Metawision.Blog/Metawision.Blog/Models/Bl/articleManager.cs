@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
+
+
 namespace Metawision.Blog.Models
 {
     public class articleManager
@@ -30,8 +32,10 @@ namespace Metawision.Blog.Models
             var p = database.articles.Where(b => b.Id == id).FirstOrDefault();
             p.viewCount = p.viewCount + 1;
             database.SubmitChanges();
+
+
         }
-        // چرا کار نکرد؟
+        
 
         public static article getArticle(int id)
         {
@@ -240,8 +244,42 @@ namespace Metawision.Blog.Models
 
         }
 
+        public static bool UpdateArticle(article m)
+        {
+            try
+            {
+                DataClasses1DataContext db = new DataClasses1DataContext();
+                var item = db.articles.Where(g => g.Id == m.Id).FirstOrDefault();
+                if (item != null)
+                {
+                    item.title = m.title;
+                    item.body = m.body;
+                    item.date = DateTime.Now;
+                    item.state = m.state;
+                    item.pic = m.pic;
+                    item.idUser = m.idUser;
+                    item.customLink = m.customLink;
 
-      
+
+
+
+                    db.SubmitChanges();
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+
+
+
 
     }
 

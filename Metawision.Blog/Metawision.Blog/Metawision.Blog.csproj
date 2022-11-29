@@ -47,6 +47,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CaptchaMvc, Version=2.5.0.0, Culture=neutral, PublicKeyToken=fe46ad421dd3b0e6, processorArchitecture=MSIL">
+      <HintPath>..\packages\CaptchaMvc.Mvc5.1.5.0\lib\net45-full\CaptchaMvc.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -244,7 +247,6 @@
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Shared\PageNotFound.cshtml" />
     <Content Include="Views\Home\showLatestPosts.cshtml" />
-    <Content Include="Views\Home\contactUs.cshtml" />
     <Content Include="Views\Admin\contactUsList.cshtml" />
     <Content Include="Views\Admin\EditArticle.cshtml" />
     <Content Include="Views\Admin\EdtArticlePartial.cshtml" />
@@ -255,6 +257,7 @@
     <Content Include="Views\Admin\Categories.cshtml" />
     <Content Include="Views\Admin\CategoriesList.cshtml" />
     <Content Include="Views\Admin\_adminLayout.cshtml" />
+    <Content Include="Views\Home\contactUs.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
