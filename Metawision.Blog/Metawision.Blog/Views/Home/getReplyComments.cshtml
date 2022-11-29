@@ -1,22 +1,276 @@
 ﻿@using Metawision.Blog.Models.bl;
 @model int
+@using CaptchaMvc.HtmlHelpers
 
-@{ 
+@{
     int artid = commentsManager.GetComment(Model).idArticle;
     string st = "t" + Model.ToString();
 }
-    <button onclick='$(".tempcss").slideUp(); $("#@st").slideToggle();' class="btn-show">reply</button>
+<button onclick='$(".tempcss").slideUp(); $("#@st").slideToggle();' class="btn-show" id="bt">پاسخ <i class="fa-solid fa-reply-all" id="reply"></i></button>
 
 <div class="tempcss" id="@st" style="border:1px solid #ccc; padding:10px;display:none;">
 
-    <form method="post" action="~/home/saveComments">
-        <div class="col-md-12">
-<textarea name="body" style="height:200px; width:100%"></textarea>
-            </div>
-            <input type="text" name="idArticle" style="visibility:hidden; display:none" value="@artid" />
-            <input type="text" name="replyToId" style="visibility:hidden; display:none" value="@Model" />
-            <input type="text" name="idUser" style="visibility:hidden; display:none" value="1"/>
 
-            <button type="submit" class="btn btn-primary btn-sm btn-block">فرستادن دیدگاه</button>
-    </form>
+
+
+    @*<form method="post" action="~/home/saveComments">
+
+                <h2>ارسال یک<span style="color:#fbdb24"> پاسخ</span> </h2>
+
+                <hr />
+
+
+
+                <div class="row">
+                    <div class="col-md-8">
+
+                        <p style="text-align:left; " class="txt"> نشانی ایمیل شما منتشر نخواهد شد. بخش‌های موردنیاز علامت‌گذاری شده‌اند.<sup style="color:red">*</sup></p>
+
+                    </div>
+                    <div class="col-md-4">
+
+                        <label for="body">دیدگاه</label>
+                    </div>
+
+
+                </div>
+
+
+
+
+                <textarea id="body" name="body" class="col-md-12" style="height:200px; width:100%;" required placeholder="نظر شما..." oninvalid="this.setCustomValidity('لطفا فیلد دیدگاه را پر کنید')" oninput="this.setCustomValidity('')"></textarea>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="name">نام<sup style="color:red">*</sup></label>
+                        <input id="name" type="text" name="name" style=" height:40px;  width:100%; " required placeholder="  " oninvalid="this.setCustomValidity('لطفا فیلد نام را پر کنید')" oninput="this.setCustomValidity('')" />
+                    </div>
+                    <div class="col-md-6">
+
+                        <label for="id">ایمیل<sup style="color:red">*</sup></label>
+                        <input id="name" type="email" name="email" style=" height:40px;  width:100%;" required placeholder=" " oninvalid="this.setCustomValidity('ایمیل را به درستی وارد کنید')" oninput="this.setCustomValidity('')" />
+                    </div>
+                </div>
+
+                <input type="number" name="captchaCode" style="height: 40px; width: 100%; margin-top:10px;" required placeholder="کد امنیتی تصویر را وارد نمایید" oninvalid="this.setCustomValidity('لطفا کد امنیتی را وارد ')" oninput="this.setCustomValidity('')" />
+
+
+
+
+
+                <input type="text" name="idArticle" style="visibility:hidden; display:none;" value="@artid" />
+                <input type="text" name="replyToId" style="visibility:hidden; display:none;" value="@Model" />
+                <input type="text" name="idUser" style="visibility:hidden; display:none;" value="1" />
+                <button type="submit"  >فرستادن دیدگاه</button>
+
+            </form>
+
+        </div>
+
+
+
+
+
+        <style>
+
+            input, textarea, button {
+                border-radius: 5px;
+                border-width: 1px;
+            }
+
+                textarea:focus, input:focus {
+                    color: #0026ff;
+                }
+
+            input, select, textarea {
+                color: #333333;
+            }
+
+            button {
+                margin-top: 10px !important;
+                width: 18%;
+                height: 50px;
+                background-color: #fbdb24;
+                color: black;
+            }
+
+            textearea, input, label {
+                display: block;
+            }
+
+            span {
+                position: relative;
+                text-align: left;
+            }
+
+            .btn-show {
+                width: 10%;
+                height: 30px;
+
+            }
+
+            #reply{
+              padding-right:5px;
+              font-size:12px;
+            }
+            #bt {
+                display: flex;
+                align-items: center;
+           }
+
+            }
+
+
+        </style>*@
+
+    <div style=" padding:10px;">
+
+        <form method="post" action="~/home/saveComments">
+            <h2>ارسال یک<span style="color:#fbdb24"> پاسخ</span></h2>
+            <hr />
+
+
+
+            <div class="row">
+                <div class="col-md-8">
+
+                    <p style="text-align:left; font-size:15px; "> نشانی ایمیل شما منتشر نخواهد شد. بخش‌های موردنیاز علامت‌گذاری شده‌اند.<sup style="color:red">*</sup></p>
+
+                </div>
+                <div class="col-md-4">
+
+                    <label for="body">دیدگاه</label>
+                </div>
+
+
+            </div>
+
+
+
+
+            <textarea id="body" name="body" class="col-md-12" style="height:200px; width:100%;" required placeholder="نظر شما..." oninvalid="this.setCustomValidity('لطفا فیلد دیدگاه را پر کنید')" oninput="this.setCustomValidity('')"></textarea>
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="name">نام<sup style="color:red">*</sup></label>
+                    <input id="name" type="text" name="name" style=" height:40px;  width:100%; " required placeholder="  " oninvalid="this.setCustomValidity('لطفا فیلد نام را پر کنید')" oninput="this.setCustomValidity('')" />
+                </div>
+                <div class="col-md-6">
+
+                    <label for="id">ایمیل<sup style="color:red">*</sup></label>
+                    <input id="name" type="email" name="email" style=" height:40px;  width:100%;" required placeholder=" " oninvalid="this.setCustomValidity('ایمیل را به درستی وارد کنید')" oninput="this.setCustomValidity('')" />
+                </div>
+            </div>
+            <p class="paragraph"> حاصل جمع را وارد کنید<sup style="color:red">*</sup></p>
+
+
+            <div class="captcha">
+
+                @{
+                    @Html.MathCaptcha(refreshText: "Try Another", inputText: "")
+                    <p class="text-danger">@ViewBag.ErrorMessage</p>
+
+                }
+
+            </div>
+
+
+
+
+
+
+
+
+
+            <input type="text" name="idArticle" style="visibility:hidden; display:none;" value="@Model" />
+            <input type="text" name="replyToId" style="visibility:hidden; display:none;" value="0" />
+            <input type="text" name="idUser" style="visibility:hidden; display:none;" value="1" />
+
+
+
+
+            <button type="submit">فرستادن دیدگاه</button>
+
+        </form>
+
+    </div>
 </div>
+
+
+
+
+<style>
+
+    input, textarea, button {
+        border-radius: 5px;
+        border-width: 1px;
+    }
+
+        textarea:focus, input:focus {
+            color: #0026ff;
+        }
+
+    input, select, textarea {
+        color: #333333;
+    }
+
+    button {
+        margin-top: 10px !important;
+        width: 18%;
+        height: 50px;
+        background-color: #fbdb24;
+        color: black;
+    }
+
+    textearea, input, label {
+        display: block;
+    }
+
+    span {
+        position: relative;
+        text-align: left;
+    }
+
+    .captcha {
+        width: 100%;
+        height: 82px;
+        margin-top: 5px;
+    }
+
+        .captcha img {
+            width: 20%;
+            height: 40px;
+            border-radius: 5px;
+            border-width: 1px;
+            border-radius: 0px 5px 5px 0px;
+        }
+
+        .captcha input {
+            padding-left: 2px;
+            float: left;
+            width: 80%;
+            height: 40px;
+            position: relative;
+            margin-top: -86px;
+            border-radius: 5px 0px 0px 5px;
+            border-width: 1px;
+        }
+
+    .paragraph {
+        position: absolute;
+        margin-top: 5px;
+    }
+
+    .btn-show {
+        width: 10%;
+        height: 30px;
+    }
+
+    #reply {
+        padding-right: 5px;
+        font-size: 12px;
+    }
+
+    #bt {
+        display: flex;
+        align-items: center;
+    }
+</style>

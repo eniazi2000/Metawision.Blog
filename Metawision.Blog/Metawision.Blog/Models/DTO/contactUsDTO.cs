@@ -9,24 +9,30 @@ namespace Metawision.Blog.Models.DTO
 {
     public class contactUsDTO
     {
+        public int id { get; set; }
+        //public int state { get; set; }
+
         [Required(ErrorMessage = "نام اجباری است")]
-        [DisplayName("نام")]
+        //[DisplayName(".")]
         public string name { get; set; }
 
         [Required(ErrorMessage = "نام خانوادگی اجباری است")]
-        [DisplayName("نام خانوادگی")]
+        //[DisplayName(".")]
         public string family { get; set; }
 
         [Required(ErrorMessage = "ایمیل اجباری است")]
         [EmailAddress(ErrorMessage = "آدرس ایمیل معتبر نیست")]
         //[DataType(DataType.EmailAddress, ErrorMessage = "E-mail is not valid")]
+        //[DisplayName(".")]
+
         public string email { get; set; }
         [Phone]
+        //[DisplayName(".")]
+
         public string phone { get; set; }
         [Required(ErrorMessage = "متن پیام اجباری است")]
-        [DisplayName("متن پیام")]
+        //[DisplayName(".")]
         public string txt { get; set; }
 
-        public int securityCode { get; set; }
     }
 }
