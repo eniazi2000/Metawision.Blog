@@ -1,18 +1,16 @@
 ﻿@using Metawision.Blog.Models;
-
-
-
-@model int
+@using Metawision.Blog.Models.DTO;
 
 @{
     ViewBag.Title = "EditArticle";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-    var m = articleManager.getArticle(Model);
-    Html.RenderPartial("EdtArticlePartial", m.convertToArticle());
+    Layout = "~/Views/Admin/_adminLayout.cshtml";
 }
 
-
-
+@{
+    var id = Convert.ToInt32(ViewContext.RouteData.Values["id"].ToString());
+    var dArt = articleManager.getArticle(id);
+    Html.RenderPartial("EdtArticlePartial", dArt.convertToArticle());
+}
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

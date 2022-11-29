@@ -14,6 +14,12 @@ namespace Metawision.Blog
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
+                name: "article",
+                url: "{controller}/{action}/{Id}/{customlink}",
+                defaults: new { controller = "Home", action = "article", Id = UrlParameter.Optional, customlink = UrlParameter.Optional}
+                );
+
+            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }

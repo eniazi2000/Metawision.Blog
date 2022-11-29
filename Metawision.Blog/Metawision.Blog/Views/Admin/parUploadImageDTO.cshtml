@@ -1,0 +1,147 @@
+﻿@using Metawision.Blog.Models.Bl
+
+@model Metawision.Blog.Models.DTO.imageDTO
+
+<form action="~/Admin/newPost" method="POST" id="imageForm">
+
+    @*@using (Html.BeginForm())*@
+    @{
+
+        @Html.AntiForgeryToken()
+        <div class="form-horizontal">
+            @*<h4>imageDTO</h4>*@
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.pic, htmlAttributes: new { @class = "control-label" })
+                <div class="col-md-12">
+                    @Html.EditorFor(model => model.pic, new { htmlAttributes = new { @class = "form-control", id = "imageTxt", style = "visibility:hidden; display:none" } })
+                    <input type="file" name="fileSelect" id="fileSelect" style="visibility:hidden; display:none" />
+                   
+                    @{
+                        if (Model.idArticle > 0)
+                        {
+                            <img src="@Model.pic.ToString()" id="thImage" class="img-responsive p-1" />
+                        }
+                        else
+                        {
+                            <img src="~/image/MWDD.jpg" id="thImage" class="img-responsive p-1" />
+                        }
+                    }
+
+                    @Html.ValidationMessageFor(model => model.pic, "", new { @class = "text-danger" })
+
+                    @Html.EditorFor(model => model.alt, new { htmlAttributes = new { @class = "form-control", id = "imageAlt" } })
+                    @Html.ValidationMessageFor(model => model.alt, "", new { @class = "text-danger" })
+
+                </div>
+                <div class="col-md-6 direction-rtl">
+                    <input type="button" onclick="uploadWithAjax()" value="بارگذاری تصویر" class="btn btn-primary" />
+                </div>
+            </div>
+        </div>
+        
+    }
+</form>
+<script>
+    function uploadWithAjax() {
+        var modelObj = @Html.Raw(Json.Encode(Model));
+        var idArt = modelObj['idArticle'];
+        var Id = modelObj['Id'];
+        var temp = 0;
+        if (idArt == null) {
+            temp = 0;
+            console.log(temp);
+        } else {
+            temp = idArt;
+        }
+        if (Id > 0) {
+            if ($("#imageTxt").val().length > 0) {
+                var senddata = {
+                    pic: $("#imageTxt").val(),
+                    alt: $("#imageAlt").val(),
+                    idArticle: temp,
+                    Id: Id
+                }
+                console.log(senddata);
+
+                $.ajax({
+                    type: "POST",
+                    url: "/admin/parUploadImageDTO",
+                    data: senddata,
+                    success: function (data) {
+                        alert("بارگذاری شد");
+                        console.log(data);
+                    },
+                    error: function (request, status, error) {
+                        /*alert(request.responseText);*/
+                        alert("بارگذاری با مشکل مواجه شد");
+                    }
+                });
+                $("#imageTxtTwo").val($("#imageTxt").val());
+                $("#theIndexImage").attr("src", $("#thImage").attr("src"));
+            }
+            else {
+                alert("فایلی انتخاب نشده");
+            }
+        } else {
+            if ($("#imageTxt").val().length > 0) {
+                var senddata = {
+                    pic: $("#imageTxt").val(),
+                    alt: $("#imageAlt").val(),
+                    idArticle: temp
+                }
+                console.log(senddata);
+
+                $.ajax({
+                    type: "POST",
+                    url: "/admin/parUploadImageDTO",
+                    data: senddata,
+                    success: function (data) {
+                        alert("بارگذاری شد");
+                        console.log(data);
+                    },
+                    error: function (request, status, error) {
+                        /*alert(request.responseText);*/
+                        alert("بارگذاری با مشکل مواجه شد");
+                    }
+                });
+                $("#imageTxtTwo").val($("#imageTxt").val());
+                $("#theIndexImage").attr("src", $("#thImage").attr("src"));
+            }
+            else {
+                alert("فایلی انتخاب نشده");
+            }
+        }
+    }
+
+
+    $("#thImage").click(function () { $("#fileSelect").click(); });
+
+    if (window.File && window.FileReader && window.FileList && window.Blob) {
+
+        document.getElementById('fileSelect').addEventListener('change',
+
+            function (evt) {
+                var files = evt.target.files;
+                var file = files[0];
+                if (files && file) {
+                    var reader = new FileReader();
+
+                    reader.onload = function (readerEvt) {
+                        var binaryString = readerEvt.target.result;
+                        var base64Image = btoa(binaryString);
+                        var base64Link = "data:image/png;base64, " + base64Image;
+                        $("#imageTxt").val(base64Link);
+                        $("#thImage").attr("src", base64Link);
+                    };
+                    reader.readAsBinaryString(file);
+                }
+            }
+            , false);
+    }
+    else {
+        alert('The File APIs are not fully supported in this browser.');
+    }
+
+</script>

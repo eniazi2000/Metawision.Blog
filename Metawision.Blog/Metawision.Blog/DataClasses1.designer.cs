@@ -36,27 +36,27 @@ namespace Metawision.Blog
     partial void Insertcattoart(cattoart instance);
     partial void Updatecattoart(cattoart instance);
     partial void Deletecattoart(cattoart instance);
+    partial void Insertcomment(comment instance);
+    partial void Updatecomment(comment instance);
+    partial void Deletecomment(comment instance);
     partial void Insertfile(file instance);
     partial void Updatefile(file instance);
     partial void Deletefile(file instance);
     partial void Inserttag(tag instance);
     partial void Updatetag(tag instance);
     partial void Deletetag(tag instance);
-    partial void Insertarticle(article instance);
-    partial void Updatearticle(article instance);
-    partial void Deletearticle(article instance);
+    partial void Insertcontact(contact instance);
+    partial void Updatecontact(contact instance);
+    partial void Deletecontact(contact instance);
     partial void InserthitCounter(hitCounter instance);
     partial void UpdatehitCounter(hitCounter instance);
     partial void DeletehitCounter(hitCounter instance);
     partial void InsertarticleLike(articleLike instance);
     partial void UpdatearticleLike(articleLike instance);
     partial void DeletearticleLike(articleLike instance);
-    partial void Insertcontact(contact instance);
-    partial void Updatecontact(contact instance);
-    partial void Deletecontact(contact instance);
-    partial void Insertcomment(comment instance);
-    partial void Updatecomment(comment instance);
-    partial void Deletecomment(comment instance);
+    partial void Insertarticle(article instance);
+    partial void Updatearticle(article instance);
+    partial void Deletearticle(article instance);
     partial void Insertimage(image instance);
     partial void Updateimage(image instance);
     partial void Deleteimage(image instance);
@@ -108,6 +108,14 @@ namespace Metawision.Blog
 			}
 		}
 		
+		public System.Data.Linq.Table<comment> comments
+		{
+			get
+			{
+				return this.GetTable<comment>();
+			}
+		}
+		
 		public System.Data.Linq.Table<file> files
 		{
 			get
@@ -124,11 +132,11 @@ namespace Metawision.Blog
 			}
 		}
 		
-		public System.Data.Linq.Table<article> articles
+		public System.Data.Linq.Table<contact> contacts
 		{
 			get
 			{
-				return this.GetTable<article>();
+				return this.GetTable<contact>();
 			}
 		}
 		
@@ -148,19 +156,11 @@ namespace Metawision.Blog
 			}
 		}
 		
-		public System.Data.Linq.Table<contact> contacts
+		public System.Data.Linq.Table<article> articles
 		{
 			get
 			{
-				return this.GetTable<contact>();
-			}
-		}
-		
-		public System.Data.Linq.Table<comment> comments
-		{
-			get
-			{
-				return this.GetTable<comment>();
+				return this.GetTable<article>();
 			}
 		}
 		
@@ -368,6 +368,212 @@ namespace Metawision.Blog
 					this._idCat = value;
 					this.SendPropertyChanged("idCat");
 					this.OnidCatChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.comment")]
+	public partial class comment : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _id;
+		
+		private int _replyToId;
+		
+		private int _idArticle;
+		
+		private string _body;
+		
+		private bool _publish;
+		
+		private string _idUser;
+		
+		private System.DateTime _date;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidChanging(int value);
+    partial void OnidChanged();
+    partial void OnreplyToIdChanging(int value);
+    partial void OnreplyToIdChanged();
+    partial void OnidArticleChanging(int value);
+    partial void OnidArticleChanged();
+    partial void OnbodyChanging(string value);
+    partial void OnbodyChanged();
+    partial void OnpublishChanging(bool value);
+    partial void OnpublishChanged();
+    partial void OnidUserChanging(string value);
+    partial void OnidUserChanged();
+    partial void OndateChanging(System.DateTime value);
+    partial void OndateChanged();
+    #endregion
+		
+		public comment()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
+					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_replyToId", DbType="Int NOT NULL")]
+		public int replyToId
+		{
+			get
+			{
+				return this._replyToId;
+			}
+			set
+			{
+				if ((this._replyToId != value))
+				{
+					this.OnreplyToIdChanging(value);
+					this.SendPropertyChanging();
+					this._replyToId = value;
+					this.SendPropertyChanged("replyToId");
+					this.OnreplyToIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idArticle", DbType="Int NOT NULL")]
+		public int idArticle
+		{
+			get
+			{
+				return this._idArticle;
+			}
+			set
+			{
+				if ((this._idArticle != value))
+				{
+					this.OnidArticleChanging(value);
+					this.SendPropertyChanging();
+					this._idArticle = value;
+					this.SendPropertyChanged("idArticle");
+					this.OnidArticleChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_body", DbType="NText NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
+		public string body
+		{
+			get
+			{
+				return this._body;
+			}
+			set
+			{
+				if ((this._body != value))
+				{
+					this.OnbodyChanging(value);
+					this.SendPropertyChanging();
+					this._body = value;
+					this.SendPropertyChanged("body");
+					this.OnbodyChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_publish", DbType="Bit NOT NULL")]
+		public bool publish
+		{
+			get
+			{
+				return this._publish;
+			}
+			set
+			{
+				if ((this._publish != value))
+				{
+					this.OnpublishChanging(value);
+					this.SendPropertyChanging();
+					this._publish = value;
+					this.SendPropertyChanged("publish");
+					this.OnpublishChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idUser", DbType="VarChar(MAX) NOT NULL", CanBeNull=false)]
+		public string idUser
+		{
+			get
+			{
+				return this._idUser;
+			}
+			set
+			{
+				if ((this._idUser != value))
+				{
+					this.OnidUserChanging(value);
+					this.SendPropertyChanging();
+					this._idUser = value;
+					this.SendPropertyChanged("idUser");
+					this.OnidUserChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_date", DbType="DateTime NOT NULL")]
+		public System.DateTime date
+		{
+			get
+			{
+				return this._date;
+			}
+			set
+			{
+				if ((this._date != value))
+				{
+					this.OndateChanging(value);
+					this.SendPropertyChanging();
+					this._date = value;
+					this.SendPropertyChanged("date");
+					this.OndateChanged();
 				}
 			}
 		}
@@ -661,29 +867,27 @@ namespace Metawision.Blog
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.article")]
-	public partial class article : INotifyPropertyChanging, INotifyPropertyChanged
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.contact")]
+	public partial class contact : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
 		private int _Id;
 		
-		private string _title;
+		private string _name;
 		
-		private string _body;
+		private string _family;
 		
-		private int _state;
+		private string _email;
 		
-		private string _pic;
+		private string _phone;
 		
-		private string _idUser;
+		private string _txt;
+		
+		private int _securityCode;
 		
 		private System.DateTime _date;
-		
-		private string _customLink;
-		
-		private int _viewCount;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -691,25 +895,23 @@ namespace Metawision.Blog
     partial void OnCreated();
     partial void OnIdChanging(int value);
     partial void OnIdChanged();
-    partial void OntitleChanging(string value);
-    partial void OntitleChanged();
-    partial void OnbodyChanging(string value);
-    partial void OnbodyChanged();
-    partial void OnstateChanging(int value);
-    partial void OnstateChanged();
-    partial void OnpicChanging(string value);
-    partial void OnpicChanged();
-    partial void OnidUserChanging(string value);
-    partial void OnidUserChanged();
+    partial void OnnameChanging(string value);
+    partial void OnnameChanged();
+    partial void OnfamilyChanging(string value);
+    partial void OnfamilyChanged();
+    partial void OnemailChanging(string value);
+    partial void OnemailChanged();
+    partial void OnphoneChanging(string value);
+    partial void OnphoneChanged();
+    partial void OntxtChanging(string value);
+    partial void OntxtChanged();
+    partial void OnsecurityCodeChanging(int value);
+    partial void OnsecurityCodeChanged();
     partial void OndateChanging(System.DateTime value);
     partial void OndateChanged();
-    partial void OncustomLinkChanging(string value);
-    partial void OncustomLinkChanged();
-    partial void OnviewCountChanging(int value);
-    partial void OnviewCountChanged();
     #endregion
 		
-		public article()
+		public contact()
 		{
 			OnCreated();
 		}
@@ -734,102 +936,122 @@ namespace Metawision.Blog
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_title", DbType="NVarChar(MAX) NOT NULL", CanBeNull=false)]
-		public string title
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_name", DbType="NVarChar(MAX) NOT NULL", CanBeNull=false)]
+		public string name
 		{
 			get
 			{
-				return this._title;
+				return this._name;
 			}
 			set
 			{
-				if ((this._title != value))
+				if ((this._name != value))
 				{
-					this.OntitleChanging(value);
+					this.OnnameChanging(value);
 					this.SendPropertyChanging();
-					this._title = value;
-					this.SendPropertyChanged("title");
-					this.OntitleChanged();
+					this._name = value;
+					this.SendPropertyChanged("name");
+					this.OnnameChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_body", DbType="NText NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
-		public string body
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_family", DbType="NVarChar(MAX) NOT NULL", CanBeNull=false)]
+		public string family
 		{
 			get
 			{
-				return this._body;
+				return this._family;
 			}
 			set
 			{
-				if ((this._body != value))
+				if ((this._family != value))
 				{
-					this.OnbodyChanging(value);
+					this.OnfamilyChanging(value);
 					this.SendPropertyChanging();
-					this._body = value;
-					this.SendPropertyChanged("body");
-					this.OnbodyChanged();
+					this._family = value;
+					this.SendPropertyChanged("family");
+					this.OnfamilyChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_state", DbType="Int NOT NULL")]
-		public int state
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_email", DbType="VarChar(MAX) NOT NULL", CanBeNull=false)]
+		public string email
 		{
 			get
 			{
-				return this._state;
+				return this._email;
 			}
 			set
 			{
-				if ((this._state != value))
+				if ((this._email != value))
 				{
-					this.OnstateChanging(value);
+					this.OnemailChanging(value);
 					this.SendPropertyChanging();
-					this._state = value;
-					this.SendPropertyChanged("state");
-					this.OnstateChanged();
+					this._email = value;
+					this.SendPropertyChanged("email");
+					this.OnemailChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_pic", DbType="Text NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
-		public string pic
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_phone", DbType="NChar(11)")]
+		public string phone
 		{
 			get
 			{
-				return this._pic;
+				return this._phone;
 			}
 			set
 			{
-				if ((this._pic != value))
+				if ((this._phone != value))
 				{
-					this.OnpicChanging(value);
+					this.OnphoneChanging(value);
 					this.SendPropertyChanging();
-					this._pic = value;
-					this.SendPropertyChanged("pic");
-					this.OnpicChanged();
+					this._phone = value;
+					this.SendPropertyChanged("phone");
+					this.OnphoneChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idUser", DbType="VarChar(MAX) NOT NULL", CanBeNull=false)]
-		public string idUser
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_txt", DbType="NText NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
+		public string txt
 		{
 			get
 			{
-				return this._idUser;
+				return this._txt;
 			}
 			set
 			{
-				if ((this._idUser != value))
+				if ((this._txt != value))
 				{
-					this.OnidUserChanging(value);
+					this.OntxtChanging(value);
 					this.SendPropertyChanging();
-					this._idUser = value;
-					this.SendPropertyChanged("idUser");
-					this.OnidUserChanged();
+					this._txt = value;
+					this.SendPropertyChanged("txt");
+					this.OntxtChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_securityCode", DbType="Int NOT NULL")]
+		public int securityCode
+		{
+			get
+			{
+				return this._securityCode;
+			}
+			set
+			{
+				if ((this._securityCode != value))
+				{
+					this.OnsecurityCodeChanging(value);
+					this.SendPropertyChanging();
+					this._securityCode = value;
+					this.SendPropertyChanged("securityCode");
+					this.OnsecurityCodeChanged();
 				}
 			}
 		}
@@ -850,46 +1072,6 @@ namespace Metawision.Blog
 					this._date = value;
 					this.SendPropertyChanged("date");
 					this.OndateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_customLink", DbType="NVarChar(MAX)")]
-		public string customLink
-		{
-			get
-			{
-				return this._customLink;
-			}
-			set
-			{
-				if ((this._customLink != value))
-				{
-					this.OncustomLinkChanging(value);
-					this.SendPropertyChanging();
-					this._customLink = value;
-					this.SendPropertyChanged("customLink");
-					this.OncustomLinkChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_viewCount", DbType="Int NOT NULL")]
-		public int viewCount
-		{
-			get
-			{
-				return this._viewCount;
-			}
-			set
-			{
-				if ((this._viewCount != value))
-				{
-					this.OnviewCountChanging(value);
-					this.SendPropertyChanging();
-					this._viewCount = value;
-					this.SendPropertyChanged("viewCount");
-					this.OnviewCountChanged();
 				}
 			}
 		}
@@ -1183,27 +1365,31 @@ namespace Metawision.Blog
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.contact")]
-	public partial class contact : INotifyPropertyChanging, INotifyPropertyChanged
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.article")]
+	public partial class article : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
 		private int _Id;
 		
-		private string _name;
+		private string _title;
 		
-		private string _family;
+		private string _body;
 		
-		private string _email;
+		private int _state;
 		
-		private string _phone;
+		private string _pic;
 		
-		private string _txt;
+		private string _idUser;
 		
 		private System.DateTime _date;
 		
-		private int _state;
+		private string _customLink;
+		
+		private int _viewCount;
+		
+		private int _idImage;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -1211,23 +1397,27 @@ namespace Metawision.Blog
     partial void OnCreated();
     partial void OnIdChanging(int value);
     partial void OnIdChanged();
-    partial void OnnameChanging(string value);
-    partial void OnnameChanged();
-    partial void OnfamilyChanging(string value);
-    partial void OnfamilyChanged();
-    partial void OnemailChanging(string value);
-    partial void OnemailChanged();
-    partial void OnphoneChanging(string value);
-    partial void OnphoneChanged();
-    partial void OntxtChanging(string value);
-    partial void OntxtChanged();
-    partial void OndateChanging(System.DateTime value);
-    partial void OndateChanged();
+    partial void OntitleChanging(string value);
+    partial void OntitleChanged();
+    partial void OnbodyChanging(string value);
+    partial void OnbodyChanged();
     partial void OnstateChanging(int value);
     partial void OnstateChanged();
+    partial void OnpicChanging(string value);
+    partial void OnpicChanged();
+    partial void OnidUserChanging(string value);
+    partial void OnidUserChanged();
+    partial void OndateChanging(System.DateTime value);
+    partial void OndateChanged();
+    partial void OncustomLinkChanging(string value);
+    partial void OncustomLinkChanged();
+    partial void OnviewCountChanging(int value);
+    partial void OnviewCountChanged();
+    partial void OnidImageChanging(int value);
+    partial void OnidImageChanged();
     #endregion
 		
-		public contact()
+		public article()
 		{
 			OnCreated();
 		}
@@ -1252,280 +1442,22 @@ namespace Metawision.Blog
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_name", DbType="NVarChar(MAX) NOT NULL", CanBeNull=false)]
-		public string name
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_title", DbType="NVarChar(MAX) NOT NULL", CanBeNull=false)]
+		public string title
 		{
 			get
 			{
-				return this._name;
+				return this._title;
 			}
 			set
 			{
-				if ((this._name != value))
+				if ((this._title != value))
 				{
-					this.OnnameChanging(value);
+					this.OntitleChanging(value);
 					this.SendPropertyChanging();
-					this._name = value;
-					this.SendPropertyChanged("name");
-					this.OnnameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_family", DbType="NVarChar(MAX) NOT NULL", CanBeNull=false)]
-		public string family
-		{
-			get
-			{
-				return this._family;
-			}
-			set
-			{
-				if ((this._family != value))
-				{
-					this.OnfamilyChanging(value);
-					this.SendPropertyChanging();
-					this._family = value;
-					this.SendPropertyChanged("family");
-					this.OnfamilyChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_email", DbType="VarChar(MAX) NOT NULL", CanBeNull=false)]
-		public string email
-		{
-			get
-			{
-				return this._email;
-			}
-			set
-			{
-				if ((this._email != value))
-				{
-					this.OnemailChanging(value);
-					this.SendPropertyChanging();
-					this._email = value;
-					this.SendPropertyChanged("email");
-					this.OnemailChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_phone", DbType="NChar(11)")]
-		public string phone
-		{
-			get
-			{
-				return this._phone;
-			}
-			set
-			{
-				if ((this._phone != value))
-				{
-					this.OnphoneChanging(value);
-					this.SendPropertyChanging();
-					this._phone = value;
-					this.SendPropertyChanged("phone");
-					this.OnphoneChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_txt", DbType="NText NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
-		public string txt
-		{
-			get
-			{
-				return this._txt;
-			}
-			set
-			{
-				if ((this._txt != value))
-				{
-					this.OntxtChanging(value);
-					this.SendPropertyChanging();
-					this._txt = value;
-					this.SendPropertyChanged("txt");
-					this.OntxtChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_date", DbType="DateTime NOT NULL")]
-		public System.DateTime date
-		{
-			get
-			{
-				return this._date;
-			}
-			set
-			{
-				if ((this._date != value))
-				{
-					this.OndateChanging(value);
-					this.SendPropertyChanging();
-					this._date = value;
-					this.SendPropertyChanged("date");
-					this.OndateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_state", DbType="Int NOT NULL")]
-		public int state
-		{
-			get
-			{
-				return this._state;
-			}
-			set
-			{
-				if ((this._state != value))
-				{
-					this.OnstateChanging(value);
-					this.SendPropertyChanging();
-					this._state = value;
-					this.SendPropertyChanged("state");
-					this.OnstateChanged();
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.comment")]
-	public partial class comment : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _id;
-		
-		private int _replyToId;
-		
-		private int _idArticle;
-		
-		private string _body;
-		
-		private bool _publish;
-		
-		private string _idUser;
-		
-		private System.DateTime _date;
-		
-		private int _commentCount;
-		
-		private string _name;
-		
-		private string _email;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnidChanging(int value);
-    partial void OnidChanged();
-    partial void OnreplyToIdChanging(int value);
-    partial void OnreplyToIdChanged();
-    partial void OnidArticleChanging(int value);
-    partial void OnidArticleChanged();
-    partial void OnbodyChanging(string value);
-    partial void OnbodyChanged();
-    partial void OnpublishChanging(bool value);
-    partial void OnpublishChanged();
-    partial void OnidUserChanging(string value);
-    partial void OnidUserChanged();
-    partial void OndateChanging(System.DateTime value);
-    partial void OndateChanged();
-    partial void OncommentCountChanging(int value);
-    partial void OncommentCountChanged();
-    partial void OnnameChanging(string value);
-    partial void OnnameChanged();
-    partial void OnemailChanging(string value);
-    partial void OnemailChanged();
-    #endregion
-		
-		public comment()
-		{
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int id
-		{
-			get
-			{
-				return this._id;
-			}
-			set
-			{
-				if ((this._id != value))
-				{
-					this.OnidChanging(value);
-					this.SendPropertyChanging();
-					this._id = value;
-					this.SendPropertyChanged("id");
-					this.OnidChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_replyToId", DbType="Int NOT NULL")]
-		public int replyToId
-		{
-			get
-			{
-				return this._replyToId;
-			}
-			set
-			{
-				if ((this._replyToId != value))
-				{
-					this.OnreplyToIdChanging(value);
-					this.SendPropertyChanging();
-					this._replyToId = value;
-					this.SendPropertyChanged("replyToId");
-					this.OnreplyToIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idArticle", DbType="Int NOT NULL")]
-		public int idArticle
-		{
-			get
-			{
-				return this._idArticle;
-			}
-			set
-			{
-				if ((this._idArticle != value))
-				{
-					this.OnidArticleChanging(value);
-					this.SendPropertyChanging();
-					this._idArticle = value;
-					this.SendPropertyChanged("idArticle");
-					this.OnidArticleChanged();
+					this._title = value;
+					this.SendPropertyChanged("title");
+					this.OntitleChanged();
 				}
 			}
 		}
@@ -1550,22 +1482,42 @@ namespace Metawision.Blog
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_publish", DbType="Bit NOT NULL")]
-		public bool publish
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_state", DbType="Int NOT NULL")]
+		public int state
 		{
 			get
 			{
-				return this._publish;
+				return this._state;
 			}
 			set
 			{
-				if ((this._publish != value))
+				if ((this._state != value))
 				{
-					this.OnpublishChanging(value);
+					this.OnstateChanging(value);
 					this.SendPropertyChanging();
-					this._publish = value;
-					this.SendPropertyChanged("publish");
-					this.OnpublishChanged();
+					this._state = value;
+					this.SendPropertyChanged("state");
+					this.OnstateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_pic", DbType="Text NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
+		public string pic
+		{
+			get
+			{
+				return this._pic;
+			}
+			set
+			{
+				if ((this._pic != value))
+				{
+					this.OnpicChanging(value);
+					this.SendPropertyChanging();
+					this._pic = value;
+					this.SendPropertyChanged("pic");
+					this.OnpicChanged();
 				}
 			}
 		}
@@ -1610,62 +1562,62 @@ namespace Metawision.Blog
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_commentCount", DbType="Int NOT NULL")]
-		public int commentCount
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_customLink", DbType="NVarChar(MAX) NOT NULL", CanBeNull=false)]
+		public string customLink
 		{
 			get
 			{
-				return this._commentCount;
+				return this._customLink;
 			}
 			set
 			{
-				if ((this._commentCount != value))
+				if ((this._customLink != value))
 				{
-					this.OncommentCountChanging(value);
+					this.OncustomLinkChanging(value);
 					this.SendPropertyChanging();
-					this._commentCount = value;
-					this.SendPropertyChanged("commentCount");
-					this.OncommentCountChanged();
+					this._customLink = value;
+					this.SendPropertyChanged("customLink");
+					this.OncustomLinkChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_name", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
-		public string name
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_viewCount", DbType="Int NOT NULL")]
+		public int viewCount
 		{
 			get
 			{
-				return this._name;
+				return this._viewCount;
 			}
 			set
 			{
-				if ((this._name != value))
+				if ((this._viewCount != value))
 				{
-					this.OnnameChanging(value);
+					this.OnviewCountChanging(value);
 					this.SendPropertyChanging();
-					this._name = value;
-					this.SendPropertyChanged("name");
-					this.OnnameChanged();
+					this._viewCount = value;
+					this.SendPropertyChanged("viewCount");
+					this.OnviewCountChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_email", DbType="VarChar(MAX) NOT NULL", CanBeNull=false)]
-		public string email
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idImage", DbType="Int NOT NULL")]
+		public int idImage
 		{
 			get
 			{
-				return this._email;
+				return this._idImage;
 			}
 			set
 			{
-				if ((this._email != value))
+				if ((this._idImage != value))
 				{
-					this.OnemailChanging(value);
+					this.OnidImageChanging(value);
 					this.SendPropertyChanging();
-					this._email = value;
-					this.SendPropertyChanged("email");
-					this.OnemailChanged();
+					this._idImage = value;
+					this.SendPropertyChanged("idImage");
+					this.OnidImageChanged();
 				}
 			}
 		}
@@ -1705,6 +1657,8 @@ namespace Metawision.Blog
 		
 		private string _alt;
 		
+		private System.DateTime _date;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -1717,6 +1671,8 @@ namespace Metawision.Blog
     partial void OnidArticleChanged();
     partial void OnaltChanging(string value);
     partial void OnaltChanged();
+    partial void OndateChanging(System.DateTime value);
+    partial void OndateChanged();
     #endregion
 		
 		public image()
@@ -1744,7 +1700,7 @@ namespace Metawision.Blog
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_pic", DbType="Text NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_pic", DbType="Text", UpdateCheck=UpdateCheck.Never)]
 		public string pic
 		{
 			get
@@ -1800,6 +1756,26 @@ namespace Metawision.Blog
 					this._alt = value;
 					this.SendPropertyChanged("alt");
 					this.OnaltChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_date", DbType="DateTime NOT NULL")]
+		public System.DateTime date
+		{
+			get
+			{
+				return this._date;
+			}
+			set
+			{
+				if ((this._date != value))
+				{
+					this.OndateChanging(value);
+					this.SendPropertyChanging();
+					this._date = value;
+					this.SendPropertyChanged("date");
+					this.OndateChanged();
 				}
 			}
 		}

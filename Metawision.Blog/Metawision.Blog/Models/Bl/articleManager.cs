@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using Metawision.Blog.Models.DTO;
 
 
 
@@ -24,6 +25,12 @@ namespace Metawision.Blog.Models
             DataClasses1DataContext db = new DataClasses1DataContext();
             return db.articles.OrderByDescending(m => m.date).Take(3).ToList();
 
+        }
+
+        public static article lastPost()
+        {
+            DataClasses1DataContext db = new DataClasses1DataContext();
+            return db.articles.OrderByDescending(m => m.Id).FirstOrDefault();
         }
 
         public static void addViewCountForAricle(int id)
@@ -54,11 +61,60 @@ namespace Metawision.Blog.Models
                     date = DateTime.Now,
                     idUser = usersManager.getUserId(),
                     pic = model.pic,
-                    state = 0,
-                    title = model.title
+                    state = model.state,
+                    title = model.title,
+                    viewCount = model.viewCount
                 };
                 DataClasses1DataContext db = new DataClasses1DataContext();
                 db.articles.InsertOnSubmit(item);
+                db.SubmitChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+        public static bool updateArticleOnDatabaseByID(article model,int id)
+        {
+            try
+            {
+                DataClasses1DataContext db = new DataClasses1DataContext();
+                var art = db.articles.Where(a => a.Id == id).FirstOrDefault();
+
+                art.body = model.body;
+                art.customLink = model.customLink;
+                art.idImage = model.idImage;
+                art.pic = model.pic;
+                art.title = model.title;
+                art.viewCount = model.viewCount;
+                art.state = model.state;
+
+                db.SubmitChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+        public static bool updateArticleOnDatabase(articleDTO model)
+        {
+            try
+            {
+                DataClasses1DataContext db = new DataClasses1DataContext();
+                var articleList = db.articles.ToList();
+                var art = articleList.Where(a => a.Id == model.id).FirstOrDefault();
+                var dArt = model.convertToArticle();
+
+                art.body = dArt.body;
+                art.customLink = dArt.customLink;
+                art.idImage = dArt.idImage;
+                art.pic = dArt.pic;
+                art.title = dArt.title;
+                art.viewCount = dArt.viewCount;
+                art.state = dArt.state;
+
                 db.SubmitChanges();
                 return true;
             }
