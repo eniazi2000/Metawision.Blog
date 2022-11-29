@@ -257,9 +257,9 @@
     <Content Include="Views\Admin\Categories.cshtml" />
     <Content Include="Views\Admin\CategoriesList.cshtml" />
     <Content Include="Views\Admin\_adminLayout.cshtml" />
-    <Content Include="Views\Admin\newPostCopy.cshtml" />
     <Content Include="Views\Admin\parUploadImageDTO.cshtml" />
     <Content Include="Views\Admin\EdtArticlePartial.cshtml" />
+    <Content Include="Views\Admin\newPostTemp.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
